@@ -24,7 +24,7 @@ The **hairdresser** sees his schedule (busy and free time slots) and marks the e
 After providing services, the Client leaves feedback. The offer to leave feedback comes to the Client's e-mail the day after the service is provided.
 
 ## DataBase schema
-![This is an image](https://github.com/vtytukh/Beauty-Salon-VT/blob/master/sql/beauty_salon_db.png)
+![DataBase schema image](/sql/beauty_salon_db.png)
 
 ## Опис проекту
 
