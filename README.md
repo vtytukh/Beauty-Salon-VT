@@ -26,7 +26,7 @@ After providing services, the Client leaves feedback. The offer to leave feedbac
 ## DataBase schema
 
 
-## ОПИС ПРОЕКТУ
+## Опис проекту
 
 Завдання фінального проекту – розробити веб-застосунок, що підтримує функціональність відповідно до варіанту завдання.
 
