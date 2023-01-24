@@ -5,6 +5,12 @@
 
     <head>
         <jsp:include page="parts/load-header.jsp"/>
+        <c:if test="${sessionScope.locale == null}">
+        	<fmt:setLocale value="en"/>
+        </c:if>
+        <c:if test="${sessionScope.locale != null}">
+        	<fmt:setLocale value="${sessionScope.locale}"/>
+        </c:if>
         <title>404 Error Page</title>
     </head>
 

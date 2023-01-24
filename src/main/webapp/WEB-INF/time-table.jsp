@@ -7,6 +7,12 @@
 <html lang="en">
     <head>
         <jsp:include page="parts/load-header.jsp"/>
+        <c:if test="${sessionScope.locale == null}">
+        	<fmt:setLocale value="en"/>
+        </c:if>
+        <c:if test="${sessionScope.locale != null}">
+        	<fmt:setLocale value="${sessionScope.locale}"/>
+        </c:if>
 
         <fmt:setBundle basename="localization" var="bundle"/>
 
@@ -52,7 +58,7 @@
                 </tbody>
             </table>
         </div>
-
+<!--
         <script defer>
             function getToday() {
                 var today = new Date();
@@ -64,7 +70,7 @@
                 return today;
             }
             document.getElementById('calendar').valueAsDate = new Date();
-        </script>
+        </script>-->
 
         <jsp:include page="parts/footer.jsp" />
     </body>

@@ -18,11 +18,8 @@ public class ClientFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         if (req.getSession() == null || req.getSession().getAttribute("role") == null) {
-            //res.sendRedirect("/salon");
-            //System.out.println("req.getContextPath()" + req.getContextPath());
             res.sendRedirect("/beauty-salon");
         } else if (!req.getSession().getAttribute("role").equals("Client")) {
-            //res.sendRedirect("/salon");
             res.sendRedirect("/beauty-salon");
         }
 

@@ -18,8 +18,6 @@ public class MasterFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         if (req.getSession() == null || req.getSession().getAttribute("role") == null) {
-            //res.sendRedirect("/salon");
-            //System.out.println("req.getContextPath()" + req.getContextPath());
             res.sendRedirect("/beauty-salon");
         } else if (!req.getSession().getAttribute("role").equals("Master")) {
             res.sendRedirect("/beauty-salon");
