@@ -52,8 +52,6 @@ public class MainPageCommand implements ServletCommand {
                     request.getSession().setAttribute("locale", "ua");
                     break;
             }
-        } else {
-            request.getSession().setAttribute("locale", "en");
         }
 
         return page;

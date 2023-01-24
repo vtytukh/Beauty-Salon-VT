@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `beauty_salon_db`.`user`(
   `password` VARCHAR(65) NOT NULL,
   `role_id` INT NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE (`email`),
   CONSTRAINT `fk_user_role`
     FOREIGN KEY (`role_id`)
     REFERENCES `beauty_salon_db`.`role` (`id`));
@@ -102,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `beauty_salon_db`.`service` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`),
+  UNIQUE (`name`));
 
 --
 -- Dumping data for table `beauty_salon_db`.`service`
@@ -208,15 +210,15 @@ CREATE TABLE IF NOT EXISTS `beauty_salon_db`.`record` (
 -- Dumping data for table `beauty_salon_db`.`record`
 --
 INSERT INTO `beauty_salon_db`.`record`(`id`, `user_id`, `master_has_service_id`, `status_id`, `time`, `mark`)
-VALUES	(1, 9, 2, 4, '2023-01-22 09:00:00.000000', DEFAULT),
-		(2, 10, 3, 4, '2023-01-22 09:00:00.000000', DEFAULT),
-		(3, 11, 5, 4, '2023-01-22 10:00:00.000000', DEFAULT),
-		(4, 12, 6, 4, '2023-01-22 11:00:00.000000', DEFAULT),
-		(5, 13, 4, 5, '2023-01-22 12:00:00.000000', DEFAULT),
-		(6, 14, 7, 4, '2023-01-23 09:00:00.000000', DEFAULT),
-		(7, 15, 8, 2, '2023-01-23 10:00:00.000000', DEFAULT),
-		(8, 9, 9, 3, '2023-01-23 11:00:00.000000', DEFAULT),
-		(9, 10, 10 ,3, '2023-01-23 12:00:00.000000', DEFAULT),
-		(10, 11, 11, 3,'2023-01-23 13:00:00.000000', DEFAULT);
+VALUES	(1, 9, 2, 4, '2023-01-25 09:00:00.000000', DEFAULT),
+		(2, 10, 3, 4, '2023-01-25 09:00:00.000000', DEFAULT),
+		(3, 11, 5, 4, '2023-01-25 10:00:00.000000', DEFAULT),
+		(4, 12, 6, 4, '2023-01-25 11:00:00.000000', DEFAULT),
+		(5, 13, 4, 5, '2023-01-25 12:00:00.000000', DEFAULT),
+		(6, 14, 7, 4, '2023-01-26 09:00:00.000000', DEFAULT),
+		(7, 15, 8, 2, '2023-01-26 10:00:00.000000', DEFAULT),
+		(8, 9, 9, 3, '2023-01-26 11:00:00.000000', DEFAULT),
+		(9, 10, 10 ,3, '2023-01-26 12:00:00.000000', DEFAULT),
+		(10, 11, 11, 3,'2023-01-26 13:00:00.000000', DEFAULT);
 
 		
