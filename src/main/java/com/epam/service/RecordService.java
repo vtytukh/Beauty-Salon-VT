@@ -85,12 +85,12 @@ public class RecordService {
         return recordDAO.updateTime(id, date);
     }
 
-    public boolean updateMark(Long id, int mark) {
+    public boolean updateMark(Long id, int mark, String feedback) {
         LOGGER.info("Update mark => " + mark);
         if (id == null) {
             return false;
         }
-        return recordDAO.updateMark(id, mark);
+        return recordDAO.updateMark(id, mark, feedback);
     }
 
 }

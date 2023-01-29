@@ -212,12 +212,13 @@ public class RecordDAO implements IRecordDAO {
     }
 
 
-    public Boolean updateMark(Long id, int mark) {
+    public Boolean updateMark(Long id, int mark, String feedback) {
         LOGGER.info("Update mark " + id + " to " + mark);
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateMark)) {
             statement.setInt(1, mark);
-            statement.setLong(2, id);
+            statement.setString(2, feedback);
+            statement.setLong(3, id);
             statement.executeUpdate();
 
         } catch (SQLException e) {

@@ -43,6 +43,10 @@
                 <input type="radio" class="btn-check" name="mark" value="5" id="option5" autocomplete="off" form="mark-form">
                 <label class="btn btn-secondary" for="option5">5</label>
 
+                <br/>
+                <label for="feedback"><fmt:message key="description" bundle="${bundle}"/>:</label>
+                <textarea class="form-control" rows="5" name="feedback" id="feedback"></textarea>
+
                 <input type="submit" value="<fmt:message key="leaveComment" bundle="${bundle}"/>" class="btn btn-success">
             </form>
         </div>

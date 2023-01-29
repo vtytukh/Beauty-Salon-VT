@@ -5,6 +5,7 @@ import com.epam.dao.Master.MasterDAO;
 import com.epam.dao.Record.RecordDAO;
 import com.epam.dao.ServiceMaster.ServiceMasterDAO;
 import com.epam.model.ServiceMaster;
+import com.epam.model.Status;
 import com.epam.service.MasterService;
 import com.epam.service.RecordService;
 import com.epam.service.ServiceMasterService;
@@ -56,8 +57,9 @@ public class CommentCommand implements ServletCommand {
         long id = Integer.parseInt(request.getParameter("id"));
         long master_id = Integer.parseInt(request.getParameter("master"));
         int mark = Integer.parseInt(request.getParameter("mark"));
+        String feedback = request.getParameter("feedback");
 
-        if(!record.updateMark(id, mark)) return page;
+        if(!record.updateMark(id, mark, feedback)) return page;
 
         List<ServiceMaster> list = serviceMaster.findServiceMasterByMasterId(master_id);
 
@@ -73,6 +75,11 @@ public class CommentCommand implements ServletCommand {
         if (master.updateMasterRate(master_id, avgMark)) {
             LOGGER.info("Updating master rate successful");
         } else LOGGER.info("Updating master rate unsuccessful");
+
+        LOGGER.info("Update status => " + Status.FEEDBACKED);
+        if (record.updateStatus(id, Status.FEEDBACKED)) {
+            LOGGER.info("Updating record status successful");
+        } else LOGGER.info("Updating record status unsuccessful");
 
         return page;
     }

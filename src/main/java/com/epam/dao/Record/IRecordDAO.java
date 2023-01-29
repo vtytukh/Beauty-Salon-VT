@@ -18,7 +18,8 @@ public interface IRecordDAO {
 
     List<Record> findAllRecordsByDate(Long id, String date, boolean isReady);
 
-    Boolean updateMark(Long id, int mark);
+    //Boolean updateMark(Long id, int mark);
+    Boolean updateMark(Long id, int mark, String feedback);
 
     Boolean updateStatus(Long id, Status status);
 
