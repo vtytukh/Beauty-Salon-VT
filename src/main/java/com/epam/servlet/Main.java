@@ -29,9 +29,11 @@ public class Main extends HttpServlet {
 
         ServletCommand command = commandManager.getGetCommand(request);
         String page = command.execute(request, response);
-        if (page != null)
+
+        if (page != null) {
             if (!response.isCommitted())
                 request.getRequestDispatcher(page).forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +43,9 @@ public class Main extends HttpServlet {
         ServletCommand command = commandManager.getPostCommand(request);
         String page = command.execute(request, response);
 
-        response.sendRedirect(getUrl(page));
+        if (page != null) {
+            response.sendRedirect(getUrl(page));
+        }
     }
 
     private String getUrl(String page) {

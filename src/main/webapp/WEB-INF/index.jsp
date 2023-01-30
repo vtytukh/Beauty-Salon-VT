@@ -27,6 +27,8 @@
     <div class="container">
         <hr>
 
+        <h2>Catalog of services</h2>
+
         <select onchange="filterServiceByMaster(this);">
             <option selected value="0"><fmt:message key="allServices" bundle="${bundle}"/></option>
             <c:forEach items="${masters}" var="master">
@@ -52,6 +54,8 @@
         </div>
 
         <hr>
+
+        <h2>List of hairdressers</h2>
 
         <select onchange="filterMasterByService(this);">
             <option selected value="0"><fmt:message key="allMasters" bundle="${bundle}"/></option>

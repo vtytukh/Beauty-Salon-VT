@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Class that get main page
@@ -42,7 +43,12 @@ public class MainPageCommand implements ServletCommand {
         request.setAttribute("services", service.findAll());
         request.setAttribute("masters", master.findAllWithName());
 
-        if (request.getParameter("locale") != null) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("locale") == null) {
+            session.setAttribute("locale", "en");
+        }
+
+        /*if (request.getParameter("locale") != null) {
             String locale = request.getParameter("locale");
             switch (locale) {
                 case "en":
@@ -52,7 +58,7 @@ public class MainPageCommand implements ServletCommand {
                     request.getSession().setAttribute("locale", "ua");
                     break;
             }
-        }
+        }*/
 
         return page;
     }

@@ -59,6 +59,8 @@ public class CommandManager {
         getCommands.put("/master/timeTable", new TimeTablePageCommand());
         getCommands.put("/admin/createService", new CreateServicePageCommand());
 
+        getCommands.put("/language", new ChangeLanguageCommand());
+
         postCommands.put("/login", new LoginCommand());
         postCommands.put("/logout", new LogoutCommand());
         postCommands.put("/register", new RegisterCommand());
@@ -76,6 +78,8 @@ public class CommandManager {
         postCommands.put("/admin/records/cancel", new CancelStatusCommand());
         postCommands.put("/admin/records/accept", new AcceptedStatusCommand());
         postCommands.put("/admin/records/updateTime", new UpdateTimeCommand());
+
+        postCommands.put("/language", new ChangeLanguageCommand());
 
 
 //        ParseProperties properties = ParseProperties.getInstance();
