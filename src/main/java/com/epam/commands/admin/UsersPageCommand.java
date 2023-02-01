@@ -52,6 +52,11 @@ public class UsersPageCommand implements ServletCommand {
 
         request.setAttribute("users", list);
 
+        //----------------
+        request.setAttribute("noOfPages", numberPages);
+        request.setAttribute("currentPage", pageNumb);
+        //----------------
+
         StringBuilder sb = new StringBuilder();
 
         sb.append("<ul class=\"pagination justify-content-center\">\n");
