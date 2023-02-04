@@ -69,4 +69,8 @@
     <url-pattern>/myOrders/*</url-pattern>
   </filter-mapping>
 
+  <listener>
+    <listener-class>com.epam.listener.ContextListener</listener-class>
+  </listener>
+
 </web-app>
