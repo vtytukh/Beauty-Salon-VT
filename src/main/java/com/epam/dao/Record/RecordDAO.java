@@ -21,6 +21,7 @@ public class RecordDAO implements IRecordDAO {
     private static String findAllQuery;
     private static String updateQuery;
     private static String findAllByDateQuery;
+    private static String findPreviousDayRecordsWithoutFeedback;
     private static String updateTimeQuery;
     private static String findAllByUserQuery;
     private static String findRecordsWithLimit;
@@ -38,6 +39,7 @@ public class RecordDAO implements IRecordDAO {
         findAllQuery = properties.getProperty("findRecords");
         updateQuery = properties.getProperty("updateStatus");
         findAllByDateQuery = properties.getProperty("findTimes");
+        findPreviousDayRecordsWithoutFeedback = properties.getProperty("findPreviousDayRecordsWithoutFeedback");
         updateTimeQuery = properties.getProperty("updateTime");
         findAllByUserQuery = properties.getProperty("findRecordByUserId");
         findRecordsWithLimit = properties.getProperty("findRecordsWithLimit");
@@ -191,6 +193,32 @@ public class RecordDAO implements IRecordDAO {
              PreparedStatement statement = connection.prepareStatement(findAllByDateQuery)) {
             statement.setLong(1, id);
             statement.setString(2, date + "%");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                Record record = new Record();
+                record.setId(result.getLong("id"));
+                String s = result.getString("time");
+                record.setTime(s);
+                record.setUser_id(result.getLong("user_id"));
+                record.setMaster_has_service_id(result.getLong("master_has_service_id"));
+                record.setStatus_id(result.getLong("status_id"));
+
+                listRecords.add(record);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+        return listRecords;
+    }
+
+    public List<Record> findPreviousDayRecordsWithoutFeedback() {
+        LOGGER.info("Getting all previous day records without feedback");
+        List<Record> listRecords = new ArrayList<>();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(findPreviousDayRecordsWithoutFeedback)) {
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {

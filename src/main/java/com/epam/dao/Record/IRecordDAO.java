@@ -27,5 +27,7 @@ public interface IRecordDAO {
 
     List<Record> findRecordsByUserId(Long id);
 
+    List<Record> findPreviousDayRecordsWithoutFeedback();
+
     Record findRecord(Long id);
 }

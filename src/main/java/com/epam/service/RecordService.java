@@ -69,6 +69,11 @@ public class RecordService {
         return recordDAO.findAllRecordsByDate(id, date, isReady);
     }
 
+    public List<Record> findPreviousDayRecordsWithoutFeedback() {
+        LOGGER.info("Finding all previous day records without feedback ");
+        return recordDAO.findPreviousDayRecordsWithoutFeedback();
+    }
+
     public boolean updateStatus(Long id, Status status) {
         LOGGER.info("Update status to " + status.value());
         if (id == null) {
