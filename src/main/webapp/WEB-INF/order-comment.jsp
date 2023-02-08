@@ -24,8 +24,9 @@
         <navbar:navbar/>
 
         <div class="container">
-            <h2><fmt:message key="evaluate" bundle="${bundle}"/> ${record.service.name}
-                <fmt:message key="madeBy" bundle="${bundle}"/> ${record.userMaster.firstName} ${record.userMaster.lastName} </h2>
+            <h2><fmt:message key="evaluate" bundle="${bundle}"/> ${record.service.name},
+                <fmt:message key="madeBy" bundle="${bundle}"/> – ${record.userMaster.firstName} ${record.userMaster.lastName}</h2>
+
             <form action="${pageContext.request.contextPath}/order/comment?id=${record.id}&master=${record.serviceMaster.master_id}"
                   method="post" id="mark-form">
                 <input type="radio" class="btn-check" name="mark" value="1" id="option1" autocomplete="off" form="mark-form">

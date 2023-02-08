@@ -29,11 +29,13 @@
 							<fmt:message key="orders" bundle="${bundle}"/>
 						</a>
 					</li>
+					<li><span class="nav-link disabled px-2">/</span></li>
 					<li>
 						<a href="${pageContext.request.contextPath}/admin/createService" class="nav-link px-2">
 							<fmt:message key="createService" bundle="${bundle}"/>
 						</a>
 					</li>
+					<li><span class="nav-link disabled px-2">/</span></li>
 					<li>
 						<a href="${pageContext.request.contextPath}/admin/users" class="nav-link px-2">
 							<fmt:message key="allUsers" bundle="${bundle}"/>
@@ -57,6 +59,7 @@
 							<fmt:message key="order" bundle="${bundle}"/>
 						</a>
 					</li>
+					<li><span class="nav-link disabled px-2">/</span></li>
 					<li>
 						<a href="${pageContext.request.contextPath}/myOrders" class="nav-link px-2">
 							<fmt:message key="myOrders" bundle="${bundle}"/>
