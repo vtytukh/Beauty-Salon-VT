@@ -7,16 +7,14 @@
 <html lang="en">
     <head>
         <jsp:include page="parts/load-header.jsp"/>
-        <c:if test="${sessionScope.locale == null}">
-        	<fmt:setLocale value="en"/>
-        </c:if>
+
         <c:if test="${sessionScope.locale != null}">
         	<fmt:setLocale value="${sessionScope.locale}"/>
         </c:if>
 
         <fmt:setBundle basename="localization" var="bundle"/>
 
-        <title>Registration</title>
+        <title><fmt:message key="registerHeader" bundle="${bundle}"/></title>
     </head>
 
     <body class="d-flex flex-column h-100">
@@ -28,7 +26,7 @@
         		<div class="col"></div>
 
         		<div class="col bg-light p-4 rounded">
-        			<h2 class="text-center"><fmt:message key="registerHeader" bundle="${bundle}"/> BeautySalon</h3>
+        			<h2 class="text-center"><fmt:message key="registerHeader" bundle="${bundle}"/></h2>
 
         			<form accept-charset="UTF-8" role="form" method="post" action="${pageContext.request.contextPath}/register">
 

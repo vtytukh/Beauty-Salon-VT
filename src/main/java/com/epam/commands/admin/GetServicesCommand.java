@@ -82,11 +82,12 @@ public class GetServicesCommand implements ServletCommand {
         PrintWriter out = response.getWriter();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<select class=\"form-select\" name=\"service-id\" form=\"services\" required>\n" +
-                "    <option selected disabled><fmt:message key=\"selectServiceForAdding\" bundle=\"${bundle}\"/></option>");
+        sb.append("<select class=\"form-select\" name=\"service-id\" id=\"service-id\" form=\"services\" required>");
         for (Service ser : list) {
-            sb.append("<option value=\"").append(ser.getId()).append("\">").append(ser.getName())
-                    //.append(request.getParameter("locale").equals("en") ? ser.getName() : ser.getNameUkr())
+            sb.append("<option value=\"")
+                    .append(ser.getId())
+                    .append("\">")
+                    .append(ser.getName())
                     .append("</option>");
         }
         sb.append("</select>");

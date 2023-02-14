@@ -56,7 +56,7 @@
                 <ul class="pagination justify-content-center">
                 	<%-- For displaying Previous link except for the 1st page --%>
                 	<c:if test="${currentPage != 1}">
-                		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${currentPage - 1}"><i class="bi bi-arrow-left"></i></a></li>
+                		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${currentPage - 1}"><i class="bi bi-caret-left-fill"></i></a></li>
                 	</c:if>
 
                 	<%-- For displaying Page numbers --%>
@@ -73,7 +73,7 @@
 
                 	<%-- For displaying Next link --%>
                 	<c:if test="${currentPage lt noOfPages}">
-                		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${currentPage + 1}"><i class="bi bi-arrow-right"></i></a></td>
+                		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${currentPage + 1}"><i class="bi bi-caret-right-fill"></i></a></td>
                 	</c:if>
                 </ul>
             </nav>

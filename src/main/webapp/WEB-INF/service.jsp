@@ -7,16 +7,14 @@
 <html lang="en">
     <head>
         <jsp:include page="parts/load-header.jsp"/>
-        <c:if test="${sessionScope.locale == null}">
-        	<fmt:setLocale value="en"/>
-        </c:if>
+
         <c:if test="${sessionScope.locale != null}">
         	<fmt:setLocale value="${sessionScope.locale}"/>
         </c:if>
 
         <fmt:setBundle basename="localization" var="bundle"/>
 
-        <title>Create service</title>
+        <title><fmt:message key="createService" bundle="${bundle}"/></title>
     </head>
 
     <body>
@@ -27,7 +25,7 @@
         		<div class="col"></div>
 
         		<div class="col bg-light p-4 rounded">
-        			<h2 class="text-center"><fmt:message key="createService" bundle="${bundle}"/></h3>
+        			<h2 class="text-center"><fmt:message key="createService" bundle="${bundle}"/> <i class="bi bi-clipboard-plus-fill"></i></h2>
 
         			<form accept-charset="UTF-8" role="form" method="post" action="${pageContext.request.contextPath}/admin/createService">
 
