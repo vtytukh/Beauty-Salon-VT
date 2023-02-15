@@ -26,13 +26,13 @@
 
             <table class="table table-hover table-striped">
                 <thead class="table-secondary">
-                <tr>
-                    <th scope="col"><fmt:message key="id" bundle="${bundle}"/></th>
-                    <th scope="col"><fmt:message key="user" bundle="${bundle}"/></th>
-                    <th scope="col">Email</th>
-                    <th scope="col"><fmt:message key="role" bundle="${bundle}"/></th>
-                    <th scope="col"><fmt:message key="edit" bundle="${bundle}"/></th>
-                </tr>
+                    <tr>
+                        <th scope="col"><fmt:message key="id" bundle="${bundle}"/></th>
+                        <th scope="col"><fmt:message key="user" bundle="${bundle}"/></th>
+                        <th scope="col">Email</th>
+                        <th scope="col"><fmt:message key="role" bundle="${bundle}"/></th>
+                        <th scope="col"><fmt:message key="edit" bundle="${bundle}"/></th>
+                    </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${users}" var="user">

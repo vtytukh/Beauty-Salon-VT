@@ -26,7 +26,7 @@
                 <div class="col"></div>
 
                 <div class="col bg-light p-4 rounded">
-                    <h2 class="text-center"><fmt:message key="loginHeader" bundle="${bundle}"/></h3>
+                    <h2 class="text-center"><fmt:message key="loginHeader" bundle="${bundle}"/></h2>
 
                     <form accept-charset="UTF-8" role="form" method="post" action="${pageContext.request.contextPath}/login">
 

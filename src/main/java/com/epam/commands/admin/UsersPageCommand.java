@@ -57,7 +57,7 @@ public class UsersPageCommand implements ServletCommand {
         request.setAttribute("currentPage", pageNumb);
         //----------------
 
-        StringBuilder sb = new StringBuilder();
+        /*StringBuilder sb = new StringBuilder();
 
         sb.append("<ul class=\"pagination justify-content-center\">\n");
         for (int i = 0; i < numberPages; i++) {
@@ -76,7 +76,7 @@ public class UsersPageCommand implements ServletCommand {
         }
         sb.append("</ul>");
 
-        request.setAttribute("pages", sb.toString());
+        request.setAttribute("pages", sb.toString());*/
 
         return page;
     }

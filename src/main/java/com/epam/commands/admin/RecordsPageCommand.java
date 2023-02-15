@@ -111,7 +111,12 @@ public class RecordsPageCommand implements ServletCommand {
 
         request.setAttribute("records", records);
 
-        StringBuilder sb = new StringBuilder();
+        //----------------
+        request.setAttribute("noOfPages", numberPages);
+        request.setAttribute("currentPage", pageNumb);
+        //----------------
+
+        /*StringBuilder sb = new StringBuilder();
 
         sb.append("<ul class=\"pagination justify-content-center\">\n");
         for (int i = 0; i < numberPages; i++) {
@@ -130,7 +135,7 @@ public class RecordsPageCommand implements ServletCommand {
         }
         sb.append("</ul>");
 
-        request.setAttribute("pages", sb.toString());
+        request.setAttribute("pages", sb.toString());*/
 
 //        List<Record> records = record.findAllRecord();
 //        List<User> users = new ArrayList<>();
