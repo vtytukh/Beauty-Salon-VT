@@ -30,8 +30,8 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><fmt:message key="user" bundle="${bundle}"/>: <c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></h4>
-                        <p class="card-text">Email: <c:out value="${user.email}" /></p>
-                        <p class="card-text"><fmt:message key="role" bundle="${bundle}"/>: <fmt:message key="role${user.role.value()}" bundle="${bundle}"/></p>
+                        <p class="card-text"><em>Email</em>: <c:out value="${user.email}" /></p>
+                        <p class="card-text"><em><fmt:message key="role" bundle="${bundle}"/></em>: <fmt:message key="role${user.role.value()}" bundle="${bundle}"/></p>
 
                         <c:if test="${user.role.value() == \"Client\"}">
                             <div class="d-flex justify-content-center">
