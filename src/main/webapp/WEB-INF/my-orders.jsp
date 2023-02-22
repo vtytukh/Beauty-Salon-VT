@@ -2,14 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="navbar" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rs" tagdir="/WEB-INF/tags" %>
 
 <!doctype html>
 <html lang="en">
     <head>
         <jsp:include page="parts/load-header.jsp"/>
-        <c:if test="${sessionScope.locale == null}">
-        	<fmt:setLocale value="en"/>
-        </c:if>
+
         <c:if test="${sessionScope.locale != null}">
         	<fmt:setLocale value="${sessionScope.locale}"/>
         </c:if>
@@ -42,7 +41,10 @@
                             <td><c:out value="${record.time}" /></td>
                             <td><c:out value="${record.userMaster.firstName}" /> <c:out value="${record.userMaster.lastName}" /></td>
                             <td><c:out value="${record.serviceMaster.price}" /></td>
-                            <td class="status-id"><c:out value="${record.status.value()}" /></td>
+                            <td class="status-id">
+                                <c:out value="${record.status.value()}" />
+                                <rs:record-status status="${record.status.value()}"/>
+                            </td>
                             <td>
                                 <c:if test="${record.status_id == 1}">
                                 <form action="${pageContext.request.contextPath}/myOrders/paid?id=${record.id}" method="post" >

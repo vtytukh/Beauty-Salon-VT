@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="navbar" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rs" tagdir="/WEB-INF/tags" %>
 
 <!doctype html>
 <html lang="en">
@@ -45,9 +46,7 @@
                             <td><c:out value="${record.userMaster.firstName}" />
                                 <c:out value="${record.userMaster.lastName}" /></td>
                             <td><c:out value="${record.service.name}" /></td>
-                            <td>
-                                <fmt:message key="${record.status.value()}Status" bundle="${bundle}"/>
-                            </td>
+                            <td><rs:record-status status="${record.status.value()}"/></td>
                             <td>
                                 <fmt:parseDate value="${record.time}" var="parsedRecordTime" pattern="yyyy-MM-dd HH:mm:ss" parseLocale="uk-UA" />
                                 <fmt:setLocale value="uk-UA"/>

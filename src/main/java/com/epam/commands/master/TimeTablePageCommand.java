@@ -104,6 +104,7 @@ public class TimeTablePageCommand implements ServletCommand {
         List<Record> recWithEmptySpace = MasterTime.getRecordsWithEmptySpace(records);
 
         request.setAttribute("records", recWithEmptySpace);
+        request.setAttribute("requestedDate", time);
 
         return page;
     }

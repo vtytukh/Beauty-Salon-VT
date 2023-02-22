@@ -93,10 +93,14 @@
                     <div id="time-accept"></div>
 
                     <c:if test="${record.status_id == 2}">
-                        <form action="${pageContext.request.contextPath}/admin/records/accept?id=${record.id}" method="post">
-                            <input class="btn btn-outline-primary form-control mt-3" type="submit"
-                                value="<fmt:message key="acceptPayment" bundle="${bundle}"/>">
-                        </form>
+                        <div class="d-flex justify-content-center">
+                            <div class="col-6">
+                                <form action="${pageContext.request.contextPath}/admin/records/accept?id=${record.id}" method="post">
+                                    <input class="btn btn-outline-primary form-control mt-3" type="submit"
+                                        value="<fmt:message key="acceptPayment" bundle="${bundle}"/>">
+                                </form>
+                            </div>
+                        </div>
                     </c:if>
 
                     <c:if test="${record.status_id < 4}">
