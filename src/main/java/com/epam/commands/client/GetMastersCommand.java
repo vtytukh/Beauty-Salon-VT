@@ -70,13 +70,12 @@ public class GetMastersCommand implements ServletCommand {
         PrintWriter out = response.getWriter();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<select name=\"master-id\" form=\"order\" required>\n" +
-                "    <option selected disabled>Select master for service</option>");
+        sb.append("<select class=\"form-select\" id=\"master-id\" name=\"master-id\" form=\"order\" required>");
         for (ServiceMaster sm : list) {
             sb.append("<option value=\"").append(sm.getMaster_id()).append("\">")
                     .append(sm.getMaster().getUser().getFirstName()).append(" ")
                     .append(sm.getMaster().getUser().getLastName()).append(", ")
-                    .append(sm.getPrice()).append("</option>");
+                    .append(sm.getPrice()).append(" ₴ </option>");
         }
         sb.append("</select>");
 

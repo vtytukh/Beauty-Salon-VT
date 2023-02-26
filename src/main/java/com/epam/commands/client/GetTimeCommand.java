@@ -86,8 +86,7 @@ public class GetTimeCommand implements ServletCommand {
         PrintWriter out = response.getWriter();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<select name=\"time\" form=\"order\" required>\n" +
-                "    <option selected disabled>Select time for order</option>");
+        sb.append("<select class=\"form-select\" id=\"time\" name=\"time\" form=\"order\" required>");
         for (Integer i : freeHours) {
             sb.append("<option value=\"").append(i).append(":00").append("\">")
                     .append(i).append(":00").append("</option>");
