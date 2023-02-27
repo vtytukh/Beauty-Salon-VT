@@ -25,7 +25,9 @@ public class RecordDAO implements IRecordDAO {
     private static String updateTimeQuery;
     private static String findAllByUserQuery;
     private static String findRecordsWithLimit;
+    private static String findRecordsByUserWithLimit;
     private static String getCountRecords;
+    private static String getCountRecordsByUserId;
     private static String getAvgMark;
     private static String updateMark;
 
@@ -42,8 +44,10 @@ public class RecordDAO implements IRecordDAO {
         findPreviousDayRecordsWithoutFeedback = properties.getProperty("findPreviousDayRecordsWithoutFeedback");
         updateTimeQuery = properties.getProperty("updateTime");
         findAllByUserQuery = properties.getProperty("findRecordByUserId");
+        findRecordsByUserWithLimit = properties.getProperty("findRecordsByUserWithLimit");
         findRecordsWithLimit = properties.getProperty("findRecordsWithLimit");
         getCountRecords = properties.getProperty("getCountRecords");
+        getCountRecordsByUserId = properties.getProperty("getCountRecordsByUserId");
         getAvgMark = properties.getProperty("getAvgMark");
         updateMark = properties.getProperty("updateMark");
     }
@@ -111,7 +115,6 @@ public class RecordDAO implements IRecordDAO {
     public int getCountRecords() {
         LOGGER.info("Getting count records");
 
-
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(getCountRecords)) {
             ResultSet result = statement.executeQuery();
@@ -123,14 +126,28 @@ public class RecordDAO implements IRecordDAO {
             return 0;
         }
         return 0;
+    }
 
+    public int getCountRecordsByUserId(Long id) {
+        LOGGER.info("Getting count records by user id " + id);
 
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(getCountRecordsByUserId)) {
+            statement.setLong(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                return result.getInt("count");
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            return 0;
+        }
+        return 0;
     }
 
     public List<Record> findRecordsWithLimit(int offset, int limit) {
         LOGGER.info("Getting records with limit");
         List<Record> listRecords = new ArrayList<>();
-
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(findRecordsWithLimit)) {
@@ -158,7 +175,6 @@ public class RecordDAO implements IRecordDAO {
     public List<Record> findAllRecords() {
         LOGGER.info("Getting all records");
         List<Record> listRecords = new ArrayList<>();
-
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(findAllQuery)) {
@@ -296,6 +312,34 @@ public class RecordDAO implements IRecordDAO {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(findAllByUserQuery)) {
             statement.setLong(1, id);
+
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                Record record = new Record();
+                record.setId(result.getLong("id"));
+                record.setUser_id(result.getLong("user_id"));
+                record.setMaster_has_service_id(result.getLong("master_has_service_id"));
+                record.setStatus_id(result.getLong("status_id"));
+                record.setTime(result.getString("time"));
+
+                records.add(record);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+        return records;
+    }
+
+    public List<Record> findRecordsByUserIdWithLimit(Long id, int offset, int limit) {
+        LOGGER.info("Getting service-master by user id " + id);
+        List<Record> records = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(findRecordsByUserWithLimit)) {
+            statement.setLong(1, id);
+            statement.setInt(2, offset);
+            statement.setInt(3, limit);
 
             ResultSet result = statement.executeQuery();
 

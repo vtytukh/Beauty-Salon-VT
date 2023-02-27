@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="navbar" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="rs" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rd" tagdir="/WEB-INF/tags" %>
 
 <!doctype html>
 <html lang="en">
@@ -48,10 +49,11 @@
                             <td><c:out value="${record.service.name}" /></td>
                             <td><rs:record-status status="${record.status.value()}"/></td>
                             <td>
-                                <fmt:parseDate value="${record.time}" var="parsedRecordTime" pattern="yyyy-MM-dd HH:mm:ss" parseLocale="uk-UA" />
+                                <!--<fmt:parseDate value="${record.time}" var="parsedRecordTime" pattern="yyyy-MM-dd HH:mm:ss" parseLocale="uk-UA" />
                                 <fmt:setLocale value="uk-UA"/>
                                 <fmt:formatDate type="date" value="${parsedRecordTime}" var="formattedRecordDate" pattern="dd.MM.yyyy HH:mm" />
-                                <c:out value="${formattedRecordDate}" />
+                                <c:out value="${formattedRecordDate}" />-->
+                                <rd:format-date date="${record.time}"/>
                             </td>
                             <td>
                                 <a title="<fmt:message key="edit" bundle="${bundle}"/>" href="${pageContext.request.contextPath}/admin/records/edit?id=${record.id}">
@@ -63,32 +65,33 @@
                 </tbody>
             </table>
 
-            <nav aria-label="Orders pagination">
-                <ul class="pagination justify-content-center">
-                    <%-- For displaying Previous link except for the 1st page --%>
-                    <c:if test="${currentPage != 1}">
-                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${currentPage - 1}"><i class="bi bi-caret-left-fill"></i></a></li>
-                    </c:if>
+            <c:if test="${noOfPages gt 1}">
+                <nav aria-label="Orders pagination">
+                    <ul class="pagination justify-content-center">
+                        <%-- For displaying Previous link except for the 1st page --%>
+                        <c:if test="${currentPage != 1}">
+                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${currentPage - 1}"><i class="bi bi-caret-left-fill"></i></a></li>
+                        </c:if>
 
-                    <%-- For displaying Page numbers --%>
-                    <c:forEach begin="1" end="${noOfPages}" var="i">
-                        <c:choose>
-                            <c:when test="${currentPage - 1 eq i or currentPage + 1 eq i}">
-                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${i}">${i}</a></li>
-                            </c:when>
-                            <c:when test="${currentPage eq i}">
-                                <li class="page-item active"><a class="page-link">${i}</a></li>
-                            </c:when>
-                        </c:choose>
-                    </c:forEach>
+                        <%-- For displaying Page numbers --%>
+                        <c:forEach begin="1" end="${noOfPages}" var="i">
+                            <c:choose>
+                                <c:when test="${currentPage - 1 eq i or currentPage + 1 eq i}">
+                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${i}">${i}</a></li>
+                                </c:when>
+                                <c:when test="${currentPage eq i}">
+                                    <li class="page-item active"><a class="page-link">${i}</a></li>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
 
-                    <%-- For displaying Next link --%>
-                    <c:if test="${currentPage lt noOfPages}">
-                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${currentPage + 1}"><i class="bi bi-caret-right-fill"></i></a></td>
-                    </c:if>
-                </ul>
-            </nav>
-
+                        <%-- For displaying Next link --%>
+                        <c:if test="${currentPage lt noOfPages}">
+                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${currentPage + 1}"><i class="bi bi-caret-right-fill"></i></a></td>
+                        </c:if>
+                    </ul>
+                </nav>
+            </c:if>
         </div>
 
         <jsp:include page="parts/footer.jsp" />

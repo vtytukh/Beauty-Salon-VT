@@ -48,6 +48,14 @@ public class RecordService {
         return recordDAO.getCountRecords();
     }
 
+    public int getCountRecordsByUserId(Long id) {
+        LOGGER.info("Getting count of records by user id " + id);
+        if (id == null) {
+            return 0;
+        }
+        return recordDAO.getCountRecordsByUserId(id);
+    }
+
     public float getAvgRecords(List<Long> ms) {
         LOGGER.info("Getting avg of mark");
         return recordDAO.getAvgRecords(ms);
@@ -59,6 +67,13 @@ public class RecordService {
             return new ArrayList<>();
         }
         return recordDAO.findRecordsByUserId(id);
+    }
+
+    public List<Record> findRecordsByUserIdWithLimit(Long id, int offset, int limit) {
+        LOGGER.info("Finding records by user id " + id + " with limit " + limit + " and offset " + offset);
+
+        if (id == null || offset < 0 || limit < 1) return new ArrayList<>();
+        return recordDAO.findRecordsByUserIdWithLimit(id, offset, limit);
     }
 
     public List<Record> findAllRecordsTime(Long id, String date, boolean isReady) {

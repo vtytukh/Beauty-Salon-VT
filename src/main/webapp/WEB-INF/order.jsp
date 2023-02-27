@@ -24,7 +24,7 @@
         	<div class="row">
         		<div class="col"></div>
         		<div class="col bg-light p-4 rounded">
-        			<h2 class="text-center"><fmt:message key="order" bundle="${bundle}"/> <i class="bi bi-clipboard-plus-fill"></i></h2>
+        			<h2 class="text-center"><fmt:message key="order" bundle="${bundle}"/> <i class="bi bi-calendar-plus-fill"></i></h2>
 
         			<form accept-charset="UTF-8" role="form" action="${pageContext.request.contextPath}/order" method="post" id="order">
         				<div class="mb-3 mt-3">

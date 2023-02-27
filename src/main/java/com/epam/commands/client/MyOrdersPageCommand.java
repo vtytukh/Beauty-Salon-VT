@@ -65,7 +65,20 @@ public class MyOrdersPageCommand implements ServletCommand {
             return page;
         }
         long user_id = (long) request.getSession().getAttribute("id");
-        List<Record> records = record.findAllRecordsByUserId(user_id);
+
+        //pagination
+        int pageNumb = 1;
+        if (request.getParameter("page") != null)
+            pageNumb = Integer.parseInt(request.getParameter("page"));
+        //int count = record.getCountRecords();
+        int count = record.getCountRecordsByUserId(user_id);
+        LOGGER.info("Count of records " + count);
+        int limit = 5;
+        int numberPages = (int) Math.ceil((float) count / limit);
+        //--------------
+
+        List<Record> records = record.findRecordsByUserIdWithLimit(user_id, (pageNumb - 1) * limit, limit);
+        //List<Record> records = record.findAllRecordsByUserId(user_id);
         List<ServiceMaster> mastersService = new ArrayList<>();
         List<Status> statuses = new ArrayList<>();
         List<Master> masters = new ArrayList<>();
@@ -86,6 +99,11 @@ public class MyOrdersPageCommand implements ServletCommand {
         }
 
         request.setAttribute("records", records);
+
+        //----------------
+        request.setAttribute("noOfPages", numberPages);
+        request.setAttribute("currentPage", pageNumb);
+        //----------------
 
         return page;
     }
