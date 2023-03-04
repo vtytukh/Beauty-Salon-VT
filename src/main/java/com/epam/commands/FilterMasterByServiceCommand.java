@@ -79,8 +79,17 @@ public class FilterMasterByServiceCommand implements ServletCommand {
                         sb.append("<h5 class=\"card-title\">");
                             sb.append(m.getUser().getFirstName()).append(" ").append(m.getUser().getLastName());
                         sb.append("</h5>");
-                        sb.append("<p class=\"card-text\">");
-                            sb.append(m.getMark());
+                        sb.append("<p class=\"card-text text-center\">");
+                            for (int i = 1; i <= 5; i++) {
+                                if (i <= m.getMark()) {
+                                    sb.append("<i class=\"bi bi-star-fill text-warning\"></i>");
+                                } else if ((i > m.getMark()) && (i - m.getMark() > 0) && (i - m.getMark() < 1)) {
+                                    sb.append("<i class=\"bi bi-star-half text-warning\"></i>");
+                                } else {
+                                    sb.append("<i class=\"bi bi-star text-warning\"></i>");
+                                }
+                            }
+                            sb.append("<br/>").append(m.getMark());
                         sb.append("</p>");
                     sb.append("</div>");
                 sb.append("</div>");
