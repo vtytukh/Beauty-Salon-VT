@@ -3,13 +3,14 @@ package com.epam.service;
 import com.epam.dao.User.UserDAO;
 import com.epam.model.Role;
 import com.epam.model.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 
 public class UserService {
 
-    private static final Logger LOGGER = Logger.getLogger(UserService.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
     private UserDAO userDao;
 

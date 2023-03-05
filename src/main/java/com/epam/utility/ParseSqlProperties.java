@@ -1,6 +1,7 @@
 package com.epam.utility;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ import java.util.Properties;
  */
 
 public class ParseSqlProperties {
-    private static final Logger LOGGER = Logger.getLogger(ParseSqlProperties.class);
+    private static final Logger LOGGER = LogManager.getLogger(ParseSqlProperties.class);
 
     private static ParseSqlProperties instance = null;
 

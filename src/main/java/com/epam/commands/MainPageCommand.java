@@ -5,7 +5,8 @@ import com.epam.dao.Service.ServiceDAO;
 import com.epam.service.MasterService;
 import com.epam.service.ServiceService;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 public class MainPageCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(MainPageCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(MainPageCommand.class);
     private ServiceService service;
     private ServiceDAO serviceDAO;
     private MasterService master;

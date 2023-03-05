@@ -5,7 +5,8 @@ import com.epam.dao.User.UserDAO;
 import com.epam.model.User;
 import com.epam.service.UserService;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class UsersPageCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(UsersPageCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(UsersPageCommand.class);
     private UserService user;
     private UserDAO userDAO;
 

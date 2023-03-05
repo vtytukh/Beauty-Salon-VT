@@ -2,14 +2,15 @@ package com.epam.listener;
 
 import com.epam.utility.ParsePathProperties;
 import com.epam.utility.email.EmailController;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class ContextListener implements ServletContextListener {
 
-    private static final Logger LOGGER = Logger.getLogger(ContextListener.class);
+    private static final Logger LOGGER = LogManager.getLogger(ContextListener.class);
 
     private EmailController emailController;
 

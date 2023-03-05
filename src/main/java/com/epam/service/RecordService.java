@@ -3,13 +3,14 @@ package com.epam.service;
 import com.epam.dao.Record.RecordDAO;
 import com.epam.model.Record;
 import com.epam.model.Status;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecordService {
-    private static final Logger LOGGER = Logger.getLogger(RecordService.class);
+    private static final Logger LOGGER = LogManager.getLogger(RecordService.class);
 
     private RecordDAO recordDAO;
 

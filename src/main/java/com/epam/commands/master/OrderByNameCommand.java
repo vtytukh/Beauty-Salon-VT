@@ -5,7 +5,8 @@ import com.epam.dao.Master.MasterDAO;
 import com.epam.model.Master;
 import com.epam.service.MasterService;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class OrderByNameCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(OrderByNameCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(OrderByNameCommand.class);
     private MasterService master;
     private MasterDAO masterDAO;
 

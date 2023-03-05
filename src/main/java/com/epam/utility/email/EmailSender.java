@@ -8,7 +8,8 @@ import com.epam.dao.User.UserDAO;
 import com.epam.model.*;
 import com.epam.model.Service;
 import com.epam.service.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -22,7 +23,7 @@ import java.util.Properties;
 
 public class EmailSender {
 
-    private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
+    private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
 
     /*private static final String EMAIL_SUBJECT = "Leave Feedback";
     private static final String EMAIL_CONTENT = "<h3>Dear, %s!</h3>" +

@@ -6,8 +6,8 @@ import com.epam.model.User;
 import com.epam.model.UserBuilder;
 import com.epam.service.Encrypt;
 import com.epam.utility.ParseSqlProperties;
-import com.google.protobuf.ServiceException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UserDAO implements IUserDAO {
-    private static final Logger LOGGER = Logger.getLogger(UserDAO.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
     private static UserDAO INSTANCE;
     private static ConnectionPool connectionPool;
 

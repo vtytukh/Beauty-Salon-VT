@@ -6,7 +6,8 @@ import com.epam.commands.client.*;
 import com.epam.commands.master.OrderByNameCommand;
 import com.epam.commands.master.TimeTablePageCommand;
 import com.epam.commands.master.UpdateStatusCommand;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 
 public class CommandManager {
 
-    private static final Logger LOGGER = Logger.getLogger(CommandManager.class);
+    private static final Logger LOGGER = LogManager.getLogger(CommandManager.class);
 
     private HashMap<String, ServletCommand> getCommands;
     private HashMap<String, ServletCommand> postCommands;

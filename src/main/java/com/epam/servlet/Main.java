@@ -2,7 +2,8 @@ package com.epam.servlet;
 
 import com.epam.commands.CommandManager;
 import com.epam.commands.ServletCommand;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -14,7 +15,7 @@ import java.io.IOException;
 
 public class Main extends HttpServlet {
 
-    private static final Logger LOGGER = Logger.getLogger(Servlet.class);
+    private static final Logger LOGGER = LogManager.getLogger(Servlet.class);
 
     private CommandManager commandManager;
 

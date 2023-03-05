@@ -2,13 +2,14 @@ package com.epam.service;
 
 import com.epam.dao.ServiceMaster.ServiceMasterDAO;
 import com.epam.model.ServiceMaster;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceMasterService {
-    private static final Logger LOGGER = Logger.getLogger(ServiceMasterService.class);
+    private static final Logger LOGGER = LogManager.getLogger(ServiceMasterService.class);
 
     private ServiceMasterDAO serviceMasterDAO;
 

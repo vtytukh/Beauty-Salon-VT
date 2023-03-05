@@ -1,7 +1,8 @@
 package com.epam.commands;
 
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class ChangeLanguageCommand implements ServletCommand{
 
-    private static final Logger LOGGER = Logger.getLogger(ChangeLanguageCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(ChangeLanguageCommand.class);
 
     private static String page;
 

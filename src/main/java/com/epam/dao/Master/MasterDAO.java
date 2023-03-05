@@ -4,7 +4,8 @@ import com.epam.connection.ConnectionPool;
 import com.epam.model.Master;
 import com.epam.model.User;
 import com.epam.utility.ParseSqlProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MasterDAO implements IMasterDAO {
-    private static final Logger LOGGER = Logger.getLogger(MasterDAO.class);
+    private static final Logger LOGGER = LogManager.getLogger(MasterDAO.class);
     private static MasterDAO INSTANCE;
     private static ConnectionPool connectionPool;
 

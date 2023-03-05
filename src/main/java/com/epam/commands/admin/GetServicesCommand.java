@@ -11,7 +11,8 @@ import com.epam.service.MasterService;
 import com.epam.service.ServiceMasterService;
 import com.epam.service.ServiceService;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class GetServicesCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(GetServicesCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(GetServicesCommand.class);
     private ServiceService service;
     private ServiceDAO serviceDAO;
     private MasterService master;

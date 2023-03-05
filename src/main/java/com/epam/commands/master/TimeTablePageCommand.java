@@ -13,7 +13,8 @@ import com.epam.model.Status;
 import com.epam.service.*;
 import com.epam.utility.MasterTime;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ import java.util.List;
 
 public class TimeTablePageCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(TimeTablePageCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(TimeTablePageCommand.class);
     private ServiceService service;
     private ServiceDAO serviceDAO;
     private MasterService master;

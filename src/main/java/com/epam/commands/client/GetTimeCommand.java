@@ -9,7 +9,8 @@ import com.epam.service.RecordService;
 import com.epam.service.ServiceMasterService;
 import com.epam.utility.MasterTime;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
 
 public class GetTimeCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(GetTimeCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(GetTimeCommand.class);
     private ServiceMasterService serviceMaster;
     private ServiceMasterDAO serviceMasterDAO;
     private RecordService record;

@@ -11,7 +11,8 @@ import com.epam.service.MasterService;
 import com.epam.service.ServiceService;
 import com.epam.service.UserService;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class RegisterCommand implements ServletCommand {
-    private static final Logger LOGGER = Logger.getLogger(RegisterCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
     private static UserDAO dao;
     private static UserService userService;
 

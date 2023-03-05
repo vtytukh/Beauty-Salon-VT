@@ -1,7 +1,8 @@
 package com.epam.utility.email;
 
 import com.epam.listener.ContextListener;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class EmailController {
 
-    private static final Logger LOGGER = Logger.getLogger(EmailController.class);
+    private static final Logger LOGGER = LogManager.getLogger(EmailController.class);
     private static final long PERIOD = ChronoUnit.DAYS.getDuration().getSeconds();
     private static final long NEXT_DAY_MORNING = ChronoUnit.HOURS.getDuration().getSeconds() * 9;
     private ScheduledExecutorService scheduledExecutorService;

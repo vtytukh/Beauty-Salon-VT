@@ -3,7 +3,8 @@ package com.epam.dao.Service;
 import com.epam.connection.ConnectionPool;
 import com.epam.model.Service;
 import com.epam.utility.ParseSqlProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ServiceDAO implements IServiceDAO {
-    private static final Logger LOGGER = Logger.getLogger(ServiceDAO.class);
+    private static final Logger LOGGER = LogManager.getLogger(ServiceDAO.class);
     private static ServiceDAO INSTANCE;
     private static ConnectionPool connectionPool;
 

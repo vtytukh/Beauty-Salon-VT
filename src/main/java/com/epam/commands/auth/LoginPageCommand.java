@@ -2,7 +2,8 @@ package com.epam.commands.auth;
 
 import com.epam.commands.ServletCommand;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class LoginPageCommand implements ServletCommand {
-    private static final Logger LOGGER = Logger.getLogger(LoginPageCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(LoginPageCommand.class);
 
     private static String loginPage;
     private static String mainPage;

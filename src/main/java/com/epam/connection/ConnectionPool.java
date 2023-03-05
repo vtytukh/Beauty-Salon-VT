@@ -1,6 +1,7 @@
 package com.epam.connection;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ConnectionPool {
-    private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     private static ConnectionPool connectionPool = null;
     private DataSource dataSource = null;

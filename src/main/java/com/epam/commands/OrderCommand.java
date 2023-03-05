@@ -8,7 +8,8 @@ import com.epam.model.Status;
 import com.epam.service.RecordService;
 import com.epam.service.ServiceMasterService;
 import com.epam.utility.ParsePathProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
 
 public class OrderCommand implements ServletCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(OrderCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(OrderCommand.class);
     private ServiceMasterService serviceMaster;
     private ServiceMasterDAO serviceMasterDAO;
     private RecordService recordS;
