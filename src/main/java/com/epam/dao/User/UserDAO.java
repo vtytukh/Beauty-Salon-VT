@@ -59,7 +59,6 @@ public class UserDAO implements IUserDAO {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
-            //statement.setString(4, user.getPassword());
             statement.setString(4, Encrypt.encrypt(user.getPassword()));
             statement.setInt(5, Role.CLIENT.ordinal()+1);
             int resQuery = statement.executeUpdate();
@@ -77,16 +76,16 @@ public class UserDAO implements IUserDAO {
             }
             LOGGER.info("User added to data base");
         } catch (SQLException e) {
-            LOGGER.error("Error to add to data base" + Arrays.toString(e.getStackTrace()));
+            LOGGER.error("Error to add to data base {}", Arrays.toString(e.getStackTrace()));
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("Something wrong with Encrypt" + Arrays.toString(e.getStackTrace()));
+            LOGGER.error("Something wrong with Encrypt {}", Arrays.toString(e.getStackTrace()));
         }
 
         return user;
     }
 
     public List<User> findAllUsers(int offset, int limit) {
-        LOGGER.info("Getting all users by limit " + limit + " with offset "+offset);
+        LOGGER.info("Getting all users by limit {} with offset {}", limit, offset);
         List<User> users = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findAllQuery)){
@@ -113,12 +112,11 @@ public class UserDAO implements IUserDAO {
 
 
     public User findUserByEmailAndPassword(String email, String password) {
-        LOGGER.info("Getting user with email " + email);
+        LOGGER.info("Getting user with email {}", email);
         User user = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByEmailAndPasswordQuery)){
             statement.setString(1, email);
-            //statement.setString(2, password);
             statement.setString(2, Encrypt.encrypt(password));
 
             ResultSet result = statement.executeQuery();
@@ -127,14 +125,14 @@ public class UserDAO implements IUserDAO {
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("Something wrong with Encrypt" + Arrays.toString(e.getStackTrace()));
+            LOGGER.error("Something wrong with Encrypt {}", Arrays.toString(e.getStackTrace()));
         }
 
         return user;
     }
 
     public Boolean updateRole(Long id, Role role) {
-        LOGGER.info("Update role " + id + " to " + role.value());
+        LOGGER.info("Update role {} to {}", id, role.value());
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(updateUserToMaster)){
             statement.setLong(1, role.ordinal()+1);
@@ -150,7 +148,7 @@ public class UserDAO implements IUserDAO {
     }
 
     public User findUserByEmail(String email) {
-        LOGGER.info("Getting user with email " + email);
+        LOGGER.info("Getting user with email {}", email);
         User user = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByEmailQuery)){
@@ -166,7 +164,7 @@ public class UserDAO implements IUserDAO {
         return user;
     }
     public User findUserById(Long id) {
-        LOGGER.info("Getting user with id " + id);
+        LOGGER.info("Getting user with id {}", id);
         User user = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByIdQuery)){
@@ -215,7 +213,7 @@ public class UserDAO implements IUserDAO {
         } catch (SQLException e) {
             LOGGER.info(e.getMessage());
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("Something wrong with Encrypt" + Arrays.toString(e.getStackTrace()));
+            LOGGER.error("Something wrong with Encrypt {}", Arrays.toString(e.getStackTrace()));
         }
 
         return user;

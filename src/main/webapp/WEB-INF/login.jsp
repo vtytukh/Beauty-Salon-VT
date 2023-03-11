@@ -22,6 +22,16 @@
         <navbar:navbar/>
 
         <div class="container mt-5 mb-5">
+
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'register_success'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="registerSuccess" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
             <div class="row">
                 <div class="col"></div>
 

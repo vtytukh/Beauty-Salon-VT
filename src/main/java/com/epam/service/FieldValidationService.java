@@ -10,7 +10,7 @@ public class FieldValidationService {
 
     private static final String EMAIL_PATTERN = "^(?=.{3,45}$)[^\\s]+@[^\\s]+\\.[^\\s]+$";
     private static final String PASSWORD_PATTERN = "^[\\w-]{6,20}$";
-    private static final String NAME_PATTERN = "^[^\\s$/()]+$";
+    private static final String NAME_PATTERN = "(.){2,45}";
 
     public static boolean isMailValid(String mail) {
         return mail != null && mail.matches(EMAIL_PATTERN);

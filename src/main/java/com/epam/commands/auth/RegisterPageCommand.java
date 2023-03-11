@@ -37,7 +37,7 @@ public class RegisterPageCommand implements ServletCommand {
         if (request.getSession().getAttribute("authenticated") != null &&
                 request.getSession().getAttribute("authenticated").equals(true)) {
             resultPage = mainPage;
-        } else if (request.getParameter("fname") == null && request.getParameter("lname") == null &&
+        } else if (request.getParameter("firstName") == null && request.getParameter("lastName") == null &&
                 request.getParameter("email") == null && request.getParameter("password") == null &&
                 request.getParameter("address") == null) {
             LOGGER.info("Returning registration page");

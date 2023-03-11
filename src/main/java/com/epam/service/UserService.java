@@ -21,12 +21,12 @@ public class UserService {
     }
 
     public List<User> findAllUsers(int offset, int limit) {
-        LOGGER.info("Find all users with offset " + offset + " and limit " + limit);
+        LOGGER.info("Find all users with offset {} and limit {}", offset, limit);
         return userDao.findAllUsers(offset, limit);
     }
 
     public boolean checkEmailAvailability(String email) {
-        LOGGER.info("Checking availability of email => " + email);
+        LOGGER.info("Checking availability of email {}", email);
 
         if (email == null) {
             return false;
@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) {
-        LOGGER.info("Finding user by email " + email);
+        LOGGER.info("Finding user by email {}", email);
 
         if (email == null) {
             return null;
@@ -62,7 +62,7 @@ public class UserService {
     }
 
     public User findUserById(Long id) {
-        LOGGER.info("Finding user by id " + id);
+        LOGGER.info("Finding user by id {}", id);
 
         if (id == null) {
             return null;
