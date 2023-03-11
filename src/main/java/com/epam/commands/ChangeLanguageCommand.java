@@ -19,13 +19,8 @@ public class ChangeLanguageCommand implements ServletCommand{
 
     private static final Logger LOGGER = LogManager.getLogger(ChangeLanguageCommand.class);
 
-    private static String page;
-
     public ChangeLanguageCommand() {
         LOGGER.info("Initializing ChangeLanguageCommand");
-
-        ParsePathProperties properties = ParsePathProperties.getInstance();
-        page = properties.getProperty("mainPage");
     }
 
     @Override
@@ -35,7 +30,7 @@ public class ChangeLanguageCommand implements ServletCommand{
         String locale = request.getParameter("locale");
         HttpSession session = request.getSession();
         session.setAttribute("locale", locale);
-        LOGGER.info("Locale: "+ locale);
+        LOGGER.info("Locale: {}", locale);
 
         String previousURL = request.getHeader("referer");
         if (previousURL != null) {

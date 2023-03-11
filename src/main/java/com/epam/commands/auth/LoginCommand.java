@@ -3,6 +3,7 @@ package com.epam.commands.auth;
 import com.epam.commands.ServletCommand;
 import com.epam.dao.User.UserDAO;
 import com.epam.model.User;
+import com.epam.service.FieldValidationService;
 import com.epam.service.UserService;
 import com.epam.utility.ParsePathProperties;
 import org.apache.logging.log4j.Logger;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Class that login a user
@@ -31,22 +33,23 @@ public class LoginCommand implements ServletCommand {
         userService = new UserService(UserDAO.getInstance());
         dao = UserDAO.getInstance();
         ParsePathProperties properties = ParsePathProperties.getInstance();
-        loginPage = properties.getProperty("loginPage");
         mainPage = properties.getProperty("mainPage");
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing LoginCommand");
 
-        String resultPage = loginPage;
+        String resultPage;
 
-        if (request.getParameter("email") != null && request.getParameter("password") != null) {
-            User user = userService.getUserByCredentials
-                    (request.getParameter("email"),
-                            request.getParameter("password"));
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        if (FieldValidationService.isMailValid(email) && FieldValidationService.isPasswordValid(password)) {
+            User user = userService.getUserByCredentials(email, password);
 
             if (user != null) {
+                LOGGER.info("User found");
                 HttpSession session = request.getSession();
                 session.setAttribute("id", user.getId());
                 session.setAttribute("email", user.getEmail());
@@ -56,8 +59,18 @@ public class LoginCommand implements ServletCommand {
 
                 resultPage = mainPage;
             } else {
+                LOGGER.info("No user found");
                 request.setAttribute("loginSuccess", false);
+                response.sendRedirect(request.getContextPath()+"/login?valid_message=no_such_user");
+
+                resultPage = null;
             }
+        } else {
+            LOGGER.info("Incorrect email or password");
+            request.setAttribute("loginSuccess", false);
+            response.sendRedirect(request.getContextPath()+"/login?valid_message=invalid_inputs");
+
+            resultPage = null;
         }
 
         return resultPage;
