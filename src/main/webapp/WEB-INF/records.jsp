@@ -24,7 +24,9 @@
 
         <div class="container mt-3 mb-3">
 
-            <h2 class="text-center"><fmt:message key="allOrders" bundle="${bundle}"/> <i class="bi bi-clipboard-data-fill"></i></h2>
+            <h2 class="text-center">
+                <fmt:message key="allOrders" bundle="${bundle}"/> <i class="bi bi-clipboard-data-fill"></i>
+            </h2>
 
             <table class="table table-hover table-striped">
                 <thead class="table-secondary">
@@ -49,14 +51,11 @@
                             <td><c:out value="${record.service.name}" /></td>
                             <td><rs:record-status status="${record.status.value()}"/></td>
                             <td>
-                                <!--<fmt:parseDate value="${record.time}" var="parsedRecordTime" pattern="yyyy-MM-dd HH:mm:ss" parseLocale="uk-UA" />
-                                <fmt:setLocale value="uk-UA"/>
-                                <fmt:formatDate type="date" value="${parsedRecordTime}" var="formattedRecordDate" pattern="dd.MM.yyyy HH:mm" />
-                                <c:out value="${formattedRecordDate}" />-->
                                 <rd:format-date date="${record.time}"/>
                             </td>
                             <td>
-                                <a title="<fmt:message key="edit" bundle="${bundle}"/>" href="${pageContext.request.contextPath}/admin/records/edit?id=${record.id}">
+                                <a title="<fmt:message key="edit" bundle="${bundle}"/>"
+                                    href="${pageContext.request.contextPath}/admin/records/edit?id=${record.id}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </td>
@@ -70,24 +69,40 @@
                     <ul class="pagination justify-content-center">
                         <%-- For displaying Previous link except for the 1st page --%>
                         <c:if test="${currentPage != 1}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${currentPage - 1}"><i class="bi bi-caret-left-fill"></i></a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="${pageContext.request.contextPath}/admin/records?page=${currentPage - 1}">
+                                    <i class="bi bi-caret-left-fill"></i>
+                                </a>
+                            </li>
                         </c:if>
 
                         <%-- For displaying Page numbers --%>
                         <c:forEach begin="1" end="${noOfPages}" var="i">
                             <c:choose>
                                 <c:when test="${currentPage - 1 eq i or currentPage + 1 eq i}">
-                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${i}">${i}</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="${pageContext.request.contextPath}/admin/records?page=${i}">${i}
+                                        </a>
+                                    </li>
                                 </c:when>
                                 <c:when test="${currentPage eq i}">
-                                    <li class="page-item active"><a class="page-link">${i}</a></li>
+                                    <li class="page-item active">
+                                        <a class="page-link">${i}</a>
+                                    </li>
                                 </c:when>
                             </c:choose>
                         </c:forEach>
 
                         <%-- For displaying Next link --%>
                         <c:if test="${currentPage lt noOfPages}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/records?page=${currentPage + 1}"><i class="bi bi-caret-right-fill"></i></a></td>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="${pageContext.request.contextPath}/admin/records?page=${currentPage + 1}">
+                                    <i class="bi bi-caret-right-fill"></i>
+                                </a>
+                            </li>
                         </c:if>
                     </ul>
                 </nav>

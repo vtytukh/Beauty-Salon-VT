@@ -22,7 +22,9 @@
 
         <div class="container mt-3 mb-3">
 
-            <h2 class="text-center"><fmt:message key="allUsers" bundle="${bundle}"/> <i class="bi bi-people-fill"></i></h2>
+            <h2 class="text-center">
+                <fmt:message key="allUsers" bundle="${bundle}"/> <i class="bi bi-people-fill"></i>
+            </h2>
 
             <table class="table table-hover table-striped">
                 <thead class="table-secondary">
@@ -43,7 +45,8 @@
                             <td><c:out value="${user.email}" /></td>
                             <td><fmt:message key="role${user.role.value()}" bundle="${bundle}"/></td>
                             <td>
-                                <a title="<fmt:message key="edit" bundle="${bundle}"/>" href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}">
+                                <a title="<fmt:message key="edit" bundle="${bundle}"/>"
+                                    href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </td>
@@ -57,24 +60,40 @@
                     <ul class="pagination justify-content-center">
                         <%-- For displaying Previous link except for the 1st page --%>
                         <c:if test="${currentPage != 1}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${currentPage - 1}"><i class="bi bi-caret-left-fill"></i></a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="${pageContext.request.contextPath}/admin/users?page=${currentPage - 1}">
+                                    <i class="bi bi-caret-left-fill"></i>
+                                </a>
+                            </li>
                         </c:if>
 
                         <%-- For displaying Page numbers --%>
                         <c:forEach begin="1" end="${noOfPages}" var="i">
                             <c:choose>
                                 <c:when test="${currentPage - 1 eq i or currentPage + 1 eq i}">
-                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${i}">${i}</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="${pageContext.request.contextPath}/admin/users?page=${i}">${i}
+                                        </a>
+                                    </li>
                                 </c:when>
                                 <c:when test="${currentPage eq i}">
-                                    <li class="page-item active"><a class="page-link">${i}</a></li>
+                                    <li class="page-item active">
+                                        <a class="page-link">${i}</a>
+                                    </li>
                                 </c:when>
                             </c:choose>
                         </c:forEach>
 
                         <%-- For displaying Next link --%>
                         <c:if test="${currentPage lt noOfPages}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/users?page=${currentPage + 1}"><i class="bi bi-caret-right-fill"></i></a></td>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="${pageContext.request.contextPath}/admin/users?page=${currentPage + 1}">
+                                    <i class="bi bi-caret-right-fill"></i>
+                                </a>
+                            </li>
                         </c:if>
                     </ul>
                 </nav>
