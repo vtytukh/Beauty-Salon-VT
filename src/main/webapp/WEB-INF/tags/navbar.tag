@@ -76,38 +76,6 @@
 				</div>
 			</c:if>
 
-<!--
-			<c:if test="${sessionScope.locale == null}">
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-lg-start mb-md-0">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/language?locale=en" class="nav-link px-2"><span class="badge bg-info">EN</span></a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/language?locale=ua" class="nav-link">UA</a>
-                    </li>
-                </ul>
-            </c:if>
-            <c:if test="${sessionScope.locale == 'en'}">
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-lg-start mb-md-0">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/language?locale=en" class="nav-link px-2"><span class="badge bg-info">EN</span></a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/language?locale=ua" class="nav-link">UA</a>
-                    </li>
-                </ul>
-            </c:if>
-            <c:if test="${sessionScope.locale == 'ua'}">
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-lg-start mb-md-0">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/language?locale=en" class="nav-link px-2">EN</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/language?locale=ua" class="nav-link"><span class="badge bg-info">UA</span></a>
-                    </li>
-                </ul>
-            </c:if> -->
-
             <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-lg-start mb-md-0">
                 <div class="dropdown">
                     <button type="button" class="btn btn-outline-secondary me-2 dropdown-toggle" data-bs-toggle="dropdown">

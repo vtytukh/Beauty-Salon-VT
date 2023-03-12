@@ -42,19 +42,20 @@ public class CreateServiceCommand implements ServletCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing CreateServiceCommand");
 
-        if (request.getParameter("name") != null && request.getParameter("desc") != null) {
-            String name = request.getParameter("name");
-            String desc = request.getParameter("desc");
+        String name = request.getParameter("name");
+        String desc = request.getParameter("desc");
 
-            LOGGER.info("Parameters name => " + name + ", desc => " + desc);
+        if (name != null && desc != null) {
+            LOGGER.info("Parameters name = {}, desc = {}", name, desc);
 
             if (service.addService(new Service(name, desc))) {
                 LOGGER.info("Creating service was successful");
-                return page;
+                response.sendRedirect(request.getContextPath()+"/admin/users?valid_message=new_service_success");
+                return null;
             }
         }
         LOGGER.info("Creating service was unsuccessful");
-        return createServicePage;
-
+        response.sendRedirect(request.getContextPath()+"/admin/createService?valid_message=new_service_unsuccessful");
+        return null;
     }
 }

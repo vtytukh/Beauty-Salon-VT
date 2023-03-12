@@ -34,8 +34,6 @@ public class CreateServicePageCommand implements ServletCommand {
     private RecordDAO recordDAO;
     private UserService user;
     private UserDAO userDAO;
-
-    private static String page;
     private static String createServicePage;
 
 
@@ -54,23 +52,11 @@ public class CreateServicePageCommand implements ServletCommand {
         record = new RecordService(recordDAO);
 
         ParsePathProperties properties = ParsePathProperties.getInstance();
-        page = properties.getProperty("mainPage");
         createServicePage = properties.getProperty("createServicePage");
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing CreateServicePageCommand");
-
-        String resultPage = createServicePage;
-//        if(request.getParameter("fname") == null && request.getParameter("lname") == null &&
-//                request.getParameter("email") == null && request.getParameter("password") == null &&
-//                request.getParameter("address") == null) {
-//            LOGGER.info("Returning creation service page");
-//            return resultPage;
-//        }
-
-
-        //resultPage = page;
-        return resultPage;
+        return createServicePage;
     }
 }

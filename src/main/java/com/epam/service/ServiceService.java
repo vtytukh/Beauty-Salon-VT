@@ -15,7 +15,6 @@ public class ServiceService {
 
     public ServiceService(ServiceDAO serviceDAO) {
         LOGGER.info("Initializing ServiceServiceImpl");
-
         this.serviceDAO = serviceDAO;
     }
 
@@ -25,7 +24,7 @@ public class ServiceService {
     }
 
     public Service findServiceById(Long id) {
-        LOGGER.info("Finding a service by id = " + id);
+        LOGGER.info("Finding a service by id = {}", id);
         if (id == null) {
             return null;
         }
@@ -34,7 +33,6 @@ public class ServiceService {
 
     public List<Service> findAll() {
         LOGGER.info("Getting all services");
-
         return serviceDAO.findAll();
     }
 
