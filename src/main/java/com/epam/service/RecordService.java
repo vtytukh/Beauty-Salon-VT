@@ -25,7 +25,7 @@ public class RecordService {
     }
 
     public Record findRecord(Long id) {
-        LOGGER.info("Finding a record by id = " + id);
+        LOGGER.info("Finding a record by id = {}", id);
         if (id == null) {
             return null;
         }
@@ -38,7 +38,7 @@ public class RecordService {
     }
 
     public List<Record> findRecordsWithLimit(int offset, int limit) {
-        LOGGER.info("Finding records with limit " + limit + " and offset " + offset);
+        LOGGER.info("Finding records with limit {} and offset {}", limit, offset);
 
         if (offset < 0 || limit < 1) return new ArrayList<>();
         return recordDAO.findRecordsWithLimit(offset, limit);
@@ -50,7 +50,7 @@ public class RecordService {
     }
 
     public int getCountRecordsByUserId(Long id) {
-        LOGGER.info("Getting count of records by user id " + id);
+        LOGGER.info("Getting count of records by user id = {}", id);
         if (id == null) {
             return 0;
         }
@@ -63,7 +63,7 @@ public class RecordService {
     }
 
     public List<Record> findAllRecordsByUserId(Long id) {
-        LOGGER.info("Finding all records by user id " + id);
+        LOGGER.info("Finding all records by user id = {}", id);
         if (id == null) {
             return new ArrayList<>();
         }
@@ -71,14 +71,14 @@ public class RecordService {
     }
 
     public List<Record> findRecordsByUserIdWithLimit(Long id, int offset, int limit) {
-        LOGGER.info("Finding records by user id " + id + " with limit " + limit + " and offset " + offset);
+        LOGGER.info("Finding records by user id = {} with limit {} and offset {}", id, limit, + offset);
 
         if (id == null || offset < 0 || limit < 1) return new ArrayList<>();
         return recordDAO.findRecordsByUserIdWithLimit(id, offset, limit);
     }
 
     public List<Record> findAllRecordsTime(Long id, String date, boolean isReady) {
-        LOGGER.info("Finding all records with date => " + date);
+        LOGGER.info("Finding all records with date = {}", date);
         if (id == null) {
             return new ArrayList<>();
         }
@@ -99,7 +99,7 @@ public class RecordService {
     }
 
     public boolean updateTime(Long id, String date) {
-        LOGGER.info("Update time to " + date);
+        LOGGER.info("Update time to {}", date);
         if (id == null) {
             return false;
         }
@@ -107,7 +107,7 @@ public class RecordService {
     }
 
     public boolean updateMark(Long id, int mark, String feedback) {
-        LOGGER.info("Update mark => " + mark);
+        LOGGER.info("Update mark = {}", mark);
         if (id == null) {
             return false;
         }

@@ -1,5 +1,6 @@
-package com.epam.commands;
+package com.epam.commands.client;
 
+import com.epam.commands.ServletCommand;
 import com.epam.dao.Master.MasterDAO;
 import com.epam.dao.Service.ServiceDAO;
 import com.epam.service.MasterService;

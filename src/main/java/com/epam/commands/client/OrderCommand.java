@@ -1,5 +1,6 @@
-package com.epam.commands;
+package com.epam.commands.client;
 
+import com.epam.commands.ServletCommand;
 import com.epam.dao.Record.RecordDAO;
 import com.epam.dao.ServiceMaster.ServiceMasterDAO;
 import com.epam.model.Record;
@@ -14,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Class that post order
@@ -43,7 +45,7 @@ public class OrderCommand implements ServletCommand {
         mainPage = properties.getProperty("mainPage");
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing OrderCommand");
 
         String resultPage = mainPage;
@@ -53,21 +55,21 @@ public class OrderCommand implements ServletCommand {
         String calendar = request.getParameter("calendar");
         String time = request.getParameter("time");
 
-        LOGGER.info("master id => " + masterId);
-        LOGGER.info("serviceId id => " + serviceId);
-        LOGGER.info("calendar id => " + calendar);
-        LOGGER.info("time id => " + time);
+        LOGGER.info("master id = {}", masterId);
+        LOGGER.info("serviceId id = {}", serviceId);
+        LOGGER.info("calendar id = {}", calendar);
+        LOGGER.info("time id = {}", time);
         HttpSession session = request.getSession();
 
         Object user_id = session.getAttribute("id");
-        LOGGER.info("user_id => " + user_id);
+        LOGGER.info("user_id = {}", user_id);
 
 
         if (masterId != null
                 && serviceId != null
                 && calendar != null
                 && time != null) {
-            LOGGER.info("order not null");
+            LOGGER.info("Order not null");
             Record record = new Record();
 
             record.setUser_id((long) user_id);
@@ -80,7 +82,13 @@ public class OrderCommand implements ServletCommand {
 
             if (recordS.addRecord(record)) {
                 LOGGER.info("Added record successfully");
-            } else LOGGER.info("Added record unsuccessfully");
+                response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=added_success");
+                resultPage = null;
+            } else {
+                LOGGER.info("Added record unsuccessfully");
+                response.sendRedirect(request.getContextPath()+"/order?valid_message=added_unsuccessful");
+                resultPage = null;
+            }
 
         }
         return resultPage;

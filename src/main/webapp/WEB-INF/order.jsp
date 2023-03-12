@@ -21,15 +21,29 @@
         <navbar:navbar/>
 
         <div class="container mt-3 mb-3">
+
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'added_unsuccessful'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="addedRecordUnsuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
         	<div class="row">
         		<div class="col"></div>
         		<div class="col bg-light p-4 rounded">
-        			<h2 class="text-center"><fmt:message key="order" bundle="${bundle}"/> <i class="bi bi-calendar-plus-fill"></i></h2>
+        			<h2 class="text-center">
+        			    <fmt:message key="order" bundle="${bundle}"/> <i class="bi bi-calendar-plus-fill"></i>
+        			</h2>
 
-        			<form accept-charset="UTF-8" role="form" action="${pageContext.request.contextPath}/order" method="post" id="order">
+        			<form accept-charset="UTF-8" role="form" action="${pageContext.request.contextPath}/order"
+        			    method="post" id="order">
         				<div class="mb-3 mt-3">
                             <label for="service-id"><fmt:message key="selectService" bundle="${bundle}"/>:</label>
-                            <select class="form-select" onchange="selectChange(this);" id="service-id" name="service-id" form="order" required>
+                            <select class="form-select" onchange="selectChange(this);" id="service-id"
+                                name="service-id" form="order" required>
                                 <option selected disabled><fmt:message key="selectService" bundle="${bundle}"/></option>
                                 <c:forEach items="${services}" var="service">
                                     <option value="${service.id}"><c:out value="${service.name}" /></option>
@@ -40,7 +54,8 @@
         				<div class="mt-3 mb-3">
         				    <label for="master-id"><fmt:message key="selectMaster" bundle="${bundle}"/>:</label>
         				    <div id="masters">
-        				        <select class="form-select" id="master-id" name="master-id" form="order" required disabled>
+        				        <select class="form-select" id="master-id"
+        				            name="master-id" form="order" required disabled>
                                     <option><fmt:message key="selectMaster" bundle="${bundle}"/></option>
                                 </select>
         				    </div>
@@ -48,7 +63,8 @@
 
                         <div class="mt-3 mb-3">
                             <label for="calendar"><fmt:message key="selectDate" bundle="${bundle}"/>:</label>
-        				    <input class="form-control" type="date" name="calendar" id="calendar" onchange="getDate(this);" required>
+        				    <input class="form-control" type="date" name="calendar" id="calendar"
+        				        onchange="getDate(this);" required>
         				</div>
 
         				<div class="mt-3 mb-3">
@@ -60,7 +76,8 @@
                             </div>
         				</div>
 
-        				<input class="w-100 btn btn-outline-primary" type="submit" value="<fmt:message key="submitOrder" bundle="${bundle}"/>">
+        				<input class="w-100 btn btn-outline-primary" type="submit"
+        				    value="<fmt:message key="submitOrder" bundle="${bundle}"/>">
         			</form>
         		</div>
         		<div class="col"></div>
@@ -75,11 +92,8 @@
         </script>
 
         <script defer>
-            //document.getElementById('calendar').valueAsDate = new Date();
             function getDate(date) {
-                console.log(date);
                 var master = document.querySelector("#masters select[name=master-id]");
-                console.log(master);
                 var dateValue = date.value;
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -87,7 +101,7 @@
                         document.getElementById("time").innerHTML = this.responseText;
                     }
                 };
-                xhttp.open("GET", "${pageContext.request.contextPath}/order/time?date="+dateValue+"&id="+master.value , true);
+                xhttp.open("GET", "${pageContext.request.contextPath}/order/time?date="+dateValue+"&id="+master.value, true);
                 xhttp.send();
             }
             function selectChange(select) {

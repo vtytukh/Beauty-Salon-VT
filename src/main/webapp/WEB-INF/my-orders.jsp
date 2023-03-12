@@ -25,7 +25,18 @@
 
         <div class="container mt-3 mb-3">
 
-            <h2 class="text-center"><fmt:message key="myOrders" bundle="${bundle}"/> <i class="bi bi-calendar2-week-fill"></i></h2>
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'added_success'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="addedRecordSuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
+            <h2 class="text-center">
+                <fmt:message key="myOrders" bundle="${bundle}"/> <i class="bi bi-calendar2-week-fill"></i>
+            </h2>
 
             <table class="table table-hover table-striped">
                 <thead class="table-secondary">
@@ -43,19 +54,25 @@
                         <tr class="align-middle">
                             <th><c:out value="${record.service.name}" /></th>
                             <td><rd:format-date date="${record.time}"/></td>
-                            <td><c:out value="${record.userMaster.firstName}" /> <c:out value="${record.userMaster.lastName}" /></td>
+                            <td><c:out value="${record.userMaster.firstName}" />
+                                <c:out value="${record.userMaster.lastName}" />
+                            </td>
                             <td><c:out value="${record.serviceMaster.price}" /> ₴</td>
                             <td class="status-id"><rs:record-status status="${record.status.value()}"/></td>
                             <td>
                                 <c:if test="${record.status_id == 1}">
-                                <form action="${pageContext.request.contextPath}/myOrders/paid?id=${record.id}" method="post" >
-                                    <input class="w-100 btn btn-warning" type="submit" value="<fmt:message key="pay" bundle="${bundle}"/>">
+                                <form action="${pageContext.request.contextPath}/myOrders/paid?id=${record.id}"
+                                    method="post" >
+                                    <input class="w-100 btn btn-warning" type="submit"
+                                        value="<fmt:message key="pay" bundle="${bundle}"/>">
                                 </form>
                                 </c:if>
 
                                 <c:if test="${record.status_id == 4}">
-                                    <a class="w-100 btn btn-primary" href="${pageContext.request.contextPath}/order/comment?id=${record.id}">
-                                        <fmt:message key="leaveComment" bundle="${bundle}"/></a>
+                                    <a class="w-100 btn btn-primary"
+                                        href="${pageContext.request.contextPath}/order/comment?id=${record.id}">
+                                        <fmt:message key="leaveComment" bundle="${bundle}"/>
+                                    </a>
                                 </c:if>
                             </td>
                         </tr>
@@ -68,14 +85,23 @@
                     <ul class="pagination justify-content-center">
                         <%-- For displaying Previous link except for the 1st page --%>
                         <c:if test="${currentPage != 1}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/myOrders?page=${currentPage - 1}"><i class="bi bi-caret-left-fill"></i></a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="${pageContext.request.contextPath}/myOrders?page=${currentPage - 1}">
+                                    <i class="bi bi-caret-left-fill"></i>
+                                </a>
+                            </li>
                         </c:if>
 
                         <%-- For displaying Page numbers --%>
                         <c:forEach begin="1" end="${noOfPages}" var="i">
                             <c:choose>
                                 <c:when test="${currentPage - 1 eq i or currentPage + 1 eq i}">
-                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/myOrders?page=${i}">${i}</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="${pageContext.request.contextPath}/myOrders?page=${i}">${i}
+                                        </a>
+                                    </li>
                                 </c:when>
                                 <c:when test="${currentPage eq i}">
                                     <li class="page-item active"><a class="page-link">${i}</a></li>
@@ -85,7 +111,12 @@
 
                         <%-- For displaying Next link --%>
                         <c:if test="${currentPage lt noOfPages}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/myOrders?page=${currentPage + 1}"><i class="bi bi-caret-right-fill"></i></a></td>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="${pageContext.request.contextPath}/myOrders?page=${currentPage + 1}">
+                                    <i class="bi bi-caret-right-fill"></i>
+                                </a>
+                            </li>
                         </c:if>
                     </ul>
                 </nav>
