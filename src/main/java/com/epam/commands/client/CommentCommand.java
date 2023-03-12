@@ -60,28 +60,37 @@ public class CommentCommand implements ServletCommand {
         int mark = Integer.parseInt(request.getParameter("mark"));
         String feedback = request.getParameter("feedback");
 
-        if(!record.updateMark(id, mark, feedback)) return page;
+        if (record.updateMark(id, mark, feedback)) {
+            LOGGER.info("Added feedback successfully");
 
-        List<ServiceMaster> list = serviceMaster.findServiceMasterByMasterId(master_id);
+            List<ServiceMaster> list = serviceMaster.findServiceMasterByMasterId(master_id);
+            List<Long> sm = new ArrayList<>();
+            for (ServiceMaster s : list) {
+                sm.add(s.getId());
+            }
 
-        List<Long> sm = new ArrayList<>();
+            float avgMark = record.getAvgRecords(sm);
+            LOGGER.info("Avg mark = {}", avgMark);
+            if (master.updateMasterRate(master_id, avgMark)) {
+                LOGGER.info("Updating master rate successful");
+            } else {
+                LOGGER.info("Updating master rate unsuccessful");
+            }
 
-        for (ServiceMaster s : list) {
-            sm.add(s.getId());
+            LOGGER.info("Update status = {}", Status.FEEDBACKED);
+            if (record.updateStatus(id, Status.FEEDBACKED)) {
+                LOGGER.info("Updating record status successful");
+            } else {
+                LOGGER.info("Updating record status unsuccessful");
+            }
+
+            response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=feedback_success");
+            page = null;
+        } else {
+            LOGGER.info("Added feedback unsuccessfully");
+            response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=feedback_unsuccessful");
+            page = null;
         }
-
-        float avgMark = record.getAvgRecords(sm);
-
-        LOGGER.info("Avg mark => " + avgMark);
-        if (master.updateMasterRate(master_id, avgMark)) {
-            LOGGER.info("Updating master rate successful");
-        } else LOGGER.info("Updating master rate unsuccessful");
-
-        LOGGER.info("Update status => " + Status.FEEDBACKED);
-        if (record.updateStatus(id, Status.FEEDBACKED)) {
-            LOGGER.info("Updating record status successful");
-        } else LOGGER.info("Updating record status unsuccessful");
-
         return page;
     }
 }

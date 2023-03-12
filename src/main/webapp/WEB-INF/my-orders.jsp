@@ -34,6 +34,24 @@
                 </div>
             </c:if>
 
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'feedback_success'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="addedFeedbackSuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'feedback_unsuccessful'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="addedFeedbackUnsuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
             <h2 class="text-center">
                 <fmt:message key="myOrders" bundle="${bundle}"/> <i class="bi bi-calendar2-week-fill"></i>
             </h2>

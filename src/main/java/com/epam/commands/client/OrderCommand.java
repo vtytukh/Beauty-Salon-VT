@@ -83,13 +83,11 @@ public class OrderCommand implements ServletCommand {
             if (recordS.addRecord(record)) {
                 LOGGER.info("Added record successfully");
                 response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=added_success");
-                resultPage = null;
             } else {
                 LOGGER.info("Added record unsuccessfully");
                 response.sendRedirect(request.getContextPath()+"/order?valid_message=added_unsuccessful");
-                resultPage = null;
             }
-
+            resultPage = null;
         }
         return resultPage;
     }
