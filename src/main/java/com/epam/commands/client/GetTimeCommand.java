@@ -67,12 +67,12 @@ public class GetTimeCommand implements ServletCommand {
         }
 
         for (Record sm : records) {
-            LOGGER.info("Time => " + sm.getTime());
+            LOGGER.info("Time = {}", sm.getTime());
         }
 
         List<Integer> freeHours = MasterTime.getFreeHours(records);
 
-        LOGGER.info("Hours => " + Arrays.toString(freeHours.toArray()));
+        LOGGER.info("Hours = " + Arrays.toString(freeHours.toArray()));
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime now = LocalDateTime.now();

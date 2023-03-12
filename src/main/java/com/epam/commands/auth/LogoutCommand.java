@@ -42,7 +42,7 @@ public class LogoutCommand implements ServletCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Executing LogoutCommand");
-        LOGGER.info("Logging out user " + request.getSession().getAttribute("email"));
+        LOGGER.info("Logging out user {}", request.getSession().getAttribute("email"));
 
         request.getSession().invalidate();
 

@@ -130,7 +130,7 @@ public class RecordDAO implements IRecordDAO {
     }
 
     public int getCountRecordsByUserId(Long id) {
-        LOGGER.info("Getting count records by user id " + id);
+        LOGGER.info("Getting count records by user id = {}", id);
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(getCountRecordsByUserId)) {
@@ -258,7 +258,7 @@ public class RecordDAO implements IRecordDAO {
 
 
     public Boolean updateMark(Long id, int mark, String feedback) {
-        LOGGER.info("Update mark " + id + " to " + mark);
+        LOGGER.info("Update mark {} to {}", id, mark);
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateMark)) {
             statement.setInt(1, mark);
@@ -276,7 +276,7 @@ public class RecordDAO implements IRecordDAO {
 
 
     public Boolean updateStatus(Long id, Status status) {
-        LOGGER.info("Update status " + id + " to " + status.value());
+        LOGGER.info("Update status id = " + id + " to " + status.value());
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
             statement.setLong(1, status.ordinal() + 1);
@@ -292,7 +292,7 @@ public class RecordDAO implements IRecordDAO {
     }
 
     public Boolean updateTime(Long id, String date) {
-        LOGGER.info("Update record " + id + " time => " + date);
+        LOGGER.info("Update record id = {}, time = {}", id, date);
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateTimeQuery)) {
             statement.setString(1, date);
@@ -308,7 +308,7 @@ public class RecordDAO implements IRecordDAO {
     }
 
     public List<Record> findRecordsByUserId(Long id) {
-        LOGGER.info("Getting service-master by user id " + id);
+        LOGGER.info("Getting service-master by user id = {}", id);
         List<Record> records = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(findAllByUserQuery)) {
@@ -334,7 +334,7 @@ public class RecordDAO implements IRecordDAO {
     }
 
     public List<Record> findRecordsByUserIdWithLimit(Long id, int offset, int limit) {
-        LOGGER.info("Getting service-master by user id " + id);
+        LOGGER.info("Getting service-master by user id = {}", id);
         List<Record> records = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(findRecordsByUserWithLimit)) {
@@ -362,7 +362,7 @@ public class RecordDAO implements IRecordDAO {
     }
 
     public Record findRecord(Long id) {
-        LOGGER.info("Getting service-master by id " + id);
+        LOGGER.info("Getting service-master by id = {}", id);
         Record record = null;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(findByIdQuery)) {

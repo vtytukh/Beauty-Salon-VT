@@ -58,10 +58,10 @@ public class UsersCommand implements ServletCommand {
         int price = Integer.parseInt(request.getParameter("price"));
         long service_id = Integer.parseInt(request.getParameter("service-id"));
 
-        LOGGER.info("user id => " + id);
+        LOGGER.info("user id = {}", id);
         Master mas = master.findMasterByUserId(id);
-        LOGGER.info("master id => " + mas.getId());
-        LOGGER.info("service id => " + service_id);
+        LOGGER.info("master id = {}", mas.getId());
+        LOGGER.info("service id = {}", service_id);
         ServiceMaster sm = new ServiceMaster();
         sm.setMaster_id(mas.getId());
         sm.setService_id(service_id);

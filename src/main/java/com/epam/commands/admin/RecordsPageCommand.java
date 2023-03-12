@@ -67,7 +67,7 @@ public class RecordsPageCommand implements ServletCommand {
         if (request.getParameter("page") != null)
             pageNumb = Integer.parseInt(request.getParameter("page"));
         int count = record.getCountRecords();
-        LOGGER.info("Count of records " + count);
+        LOGGER.info("Count of records {}", count);
         int limit = 5;
         int numberPages = (int) Math.ceil((float) count / limit);
         List<Record> records = record.findRecordsWithLimit((pageNumb - 1) * limit, limit);

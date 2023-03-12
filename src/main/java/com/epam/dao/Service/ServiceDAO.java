@@ -88,7 +88,7 @@ public class ServiceDAO implements IServiceDAO {
     }
 
     public Service findService(Long id) {
-        LOGGER.info("Getting service by id " + id);
+        LOGGER.info("Getting service by id = {}", id);
         Service service = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByIdQuery)){

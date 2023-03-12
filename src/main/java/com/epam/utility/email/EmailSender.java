@@ -139,15 +139,15 @@ public class EmailSender {
             records.get(i).setStatus(statuses.get(i));
         }
 
-        if (records.size() > 0) {
+        if (!records.isEmpty()) {
 
             for (int i = 0; i < records.size(); i++) {
-                LOGGER.info("Client name " + records.get(i).getUser().getFirstName());
-                LOGGER.info("Client email " + records.get(i).getUser().getEmail());
-                LOGGER.info("Master name " + records.get(i).getUserMaster().getFirstName());
-                LOGGER.info("Master lastname " + records.get(i).getUserMaster().getLastName());
-                LOGGER.info("Service name " + records.get(i).getService().getName());
-                LOGGER.info("Record id " + records.get(i).getId());
+                LOGGER.info("Client name {}", records.get(i).getUser().getFirstName());
+                LOGGER.info("Client email {}", records.get(i).getUser().getEmail());
+                LOGGER.info("Master name {}", records.get(i).getUserMaster().getFirstName());
+                LOGGER.info("Master lastname {}", records.get(i).getUserMaster().getLastName());
+                LOGGER.info("Service name {}", records.get(i).getService().getName());
+                LOGGER.info("Record id = {}", records.get(i).getId());
 
                 boolean result = sendEmail(records.get(i).getUser().getEmail(),
                         records.get(i).getUser().getFirstName(),
@@ -163,6 +163,6 @@ public class EmailSender {
     }
 
     static void emailProcessTest(){
-        LOGGER.info("emailProcessTest: " + LocalDateTime.now());
+        LOGGER.info("emailProcessTest: {}", LocalDateTime.now());
     }
 }

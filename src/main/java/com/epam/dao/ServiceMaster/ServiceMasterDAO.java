@@ -87,7 +87,7 @@ public class ServiceMasterDAO implements IServiceMasterDAO {
 
 
     public List<ServiceMaster> findMasterByService(Long id) {
-        LOGGER.info("Getting masters by service id " + id);
+        LOGGER.info("Getting masters by service id = {}", id);
         List<ServiceMaster> listMasters = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByService)){
@@ -109,7 +109,7 @@ public class ServiceMasterDAO implements IServiceMasterDAO {
     }
 
     public ServiceMaster findServiceMaster(Long id) {
-        LOGGER.info("Getting service-master by id " + id);
+        LOGGER.info("Getting service-master by id = {}", id);
         ServiceMaster serviceMaster = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByIdQuery)){
@@ -126,7 +126,7 @@ public class ServiceMasterDAO implements IServiceMasterDAO {
     }
 
     public ServiceMaster findServiceMasterByMasterAndService(Long master_id, Long service_id) {
-        LOGGER.info("Getting service-master by master id "+master_id+"and service id " + service_id);
+        LOGGER.info("Getting service-master by master id = {} and service id = {}", master_id, service_id);
         ServiceMaster sm = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByMasterAndServiceIdQuery)){
@@ -148,7 +148,7 @@ public class ServiceMasterDAO implements IServiceMasterDAO {
     }
 
     public List<ServiceMaster> findServiceMasterByMaster(Long id) {
-        LOGGER.info("Getting service-master by master id " + id);
+        LOGGER.info("Getting service-master by master id = {}", id);
         List<ServiceMaster> serviceMaster = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByMasterIdQuery)){

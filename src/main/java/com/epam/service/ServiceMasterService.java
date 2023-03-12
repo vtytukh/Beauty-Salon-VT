@@ -27,7 +27,7 @@ public class ServiceMasterService {
     }
 
     public ServiceMaster findServiceMasterById(Long id) {
-        LOGGER.info("Finding a service by id = " + id);
+        LOGGER.info("Finding a service by id = {}", id);
         if (id == null) {
             return null;
         }
@@ -35,7 +35,7 @@ public class ServiceMasterService {
     }
 
     public List<ServiceMaster> findMastersByService(Long id) {
-        LOGGER.info("Finding masters by service id = " + id);
+        LOGGER.info("Finding masters by service id = {}", id);
         if (id == null) {
             return new ArrayList<>();
         }
@@ -43,7 +43,7 @@ public class ServiceMasterService {
     }
 
     public List<ServiceMaster> findServiceMasterByMasterId(Long id) {
-        LOGGER.info("Finding masters-service by master id = " + id);
+        LOGGER.info("Finding masters-service by master id = {}", id);
         if (id == null) {
             return new ArrayList<>();
         }
@@ -51,7 +51,7 @@ public class ServiceMasterService {
     }
 
     public ServiceMaster findServiceMasterByMasterAndService(Long master_id, Long service_id) {
-        LOGGER.info("Finding masters-service by master id " + master_id + "and service id " + service_id);
+        LOGGER.info("Finding masters-service by master id = {} and service id = {}", master_id, service_id);
         if (master_id == null || service_id == null) {
             return null;
         }

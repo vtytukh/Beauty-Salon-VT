@@ -45,7 +45,7 @@ public class UsersPageCommand implements ServletCommand {
         if (request.getParameter("page") != null)
             pageNumb = Integer.parseInt(request.getParameter("page"));
         int count = user.getCountUsers();
-        LOGGER.info("Count users => " + count);
+        LOGGER.info("Count users = {}", count);
         int limit = 5;
         int numberPages = (int) Math.ceil((float) count / limit);
 

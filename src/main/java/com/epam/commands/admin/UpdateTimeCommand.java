@@ -44,16 +44,16 @@ public class UpdateTimeCommand implements ServletCommand {
         if (request.getParameter("id") != null && request.getParameter("time") != null) {
             long record_id = Integer.parseInt(request.getParameter("id"));
             String hour = request.getParameter("time");
-            LOGGER.info("Hour " + hour);
+            LOGGER.info("Hour {}", hour);
 
             String time;
             if (hour.length() == 1) time = "0" + hour + ":00";
             else time = hour + ":00";
-            LOGGER.info("Time " + time);
+            LOGGER.info("Time {}", time);
             Record rec = record.findRecord(record_id);
 
             String date = rec.getTime().substring(0, 11) + time;
-            LOGGER.info("Date " + date);
+            LOGGER.info("Date {}", date);
 
             if (record.updateTime(record_id, date)) {
                 LOGGER.info("Update time was successfully");

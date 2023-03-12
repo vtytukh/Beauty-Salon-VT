@@ -23,7 +23,7 @@ public class MasterService {
     }
 
     public Master findMasterById(Long id) {
-        LOGGER.info("Finding a master by id = " + id);
+        LOGGER.info("Finding a master by id = {}", id);
         if (id == null) {
             return null;
         }
@@ -43,7 +43,7 @@ public class MasterService {
     }
 
     public Master findMasterWithNameById(Long id) {
-        LOGGER.info("Finding master with name by id = " + id);
+        LOGGER.info("Finding master with name by id = {}", id);
         if (id == null) {
             return null;
         }
@@ -51,7 +51,7 @@ public class MasterService {
     }
 
     public Master findMasterByUserId(Long id) {
-        LOGGER.info("Finding master by user id = " + id);
+        LOGGER.info("Finding master by user id = {}", id);
         if (id == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public class MasterService {
     }
 
     public boolean updateMasterRate(Long id, float rate) {
-        LOGGER.info("Updating master rate" + id);
+        LOGGER.info("Updating master rate with id = {}", id);
         if (id == null) {
             return false;
         }
