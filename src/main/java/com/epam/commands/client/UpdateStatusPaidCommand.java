@@ -44,7 +44,12 @@ public class UpdateStatusPaidCommand implements ServletCommand {
             long id = Integer.parseInt(request.getParameter("id"));
             if (record.updateStatus(id, Status.PAID)) {
                 LOGGER.info("Updating status to paid was successful");
-            } else LOGGER.info("Updating status to paid was unsuccessful");
+                response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=payment_success");
+            } else {
+                LOGGER.info("Updating status to paid was unsuccessful");
+                response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=payment_unsuccessful");
+            }
+            page = null;
         }
         return page;
     }
