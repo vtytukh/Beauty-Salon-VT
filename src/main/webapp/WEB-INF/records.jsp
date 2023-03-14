@@ -24,6 +24,24 @@
 
         <div class="container mt-3 mb-3">
 
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'accepted_success'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="acceptedPaymentSuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'accepted_unsuccessful'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="acceptedPaymentUnsuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
             <h2 class="text-center">
                 <fmt:message key="allOrders" bundle="${bundle}"/> <i class="bi bi-clipboard-data-fill"></i>
             </h2>

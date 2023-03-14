@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.io.IOException;
 
 /**
  * Class that set status to accept of record
@@ -35,19 +35,22 @@ public class AcceptedStatusCommand implements ServletCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing AcceptedStatusCommand");
 
         String resultPage = recordsPage;
-        LOGGER.info("Id parameter " + request.getParameter("id"));
+
         if (request.getParameter("id") != null) {
             long id = Integer.parseInt(request.getParameter("id"));
             if (record.updateStatus(id, Status.ACCEPTED)) {
                 LOGGER.info("Set status to accepted successful");
-                return resultPage;
+                response.sendRedirect(request.getContextPath()+"/admin/records?valid_message=accepted_success");
+            } else {
+                LOGGER.info("Set status to accepted unsuccessful");
+                response.sendRedirect(request.getContextPath()+"/admin/records?valid_message=accepted_unsuccessful");
             }
+            resultPage = null;
         }
-        LOGGER.info("Set status to accepted unsuccessful");
-        return recordsPage;
+        return resultPage;
     }
 }
