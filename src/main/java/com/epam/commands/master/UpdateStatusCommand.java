@@ -44,10 +44,13 @@ public class UpdateStatusCommand implements ServletCommand {
             long id = Integer.parseInt(request.getParameter("id"));
             if (record.updateStatus(id, Status.FINISHED)) {
                 LOGGER.info("Updating status to finished was successful");
+                response.sendRedirect(request.getContextPath()+"/master/timeTable?valid_message=finished_success");
+            } else {
+                LOGGER.info("Updating status to finished was unsuccessful");
+                response.sendRedirect(request.getContextPath()+"/master/timeTable?valid_message=finished_unsuccessful");
             }
+            page = null;
         }
-        LOGGER.info("Updating status to finished was unsuccessful");
         return page;
     }
-
 }
