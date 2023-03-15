@@ -135,7 +135,7 @@ public class MasterDAO implements IMasterDAO {
     }
 
     public Master findMasterWithNameById(Long id) {
-        LOGGER.info("Getting master with name by id " + id);
+        LOGGER.info("Getting master with name by id = {}", id);
         Master master = null;
 
         try(Connection connection = connectionPool.getConnection();
@@ -184,14 +184,13 @@ public class MasterDAO implements IMasterDAO {
 
 
     public boolean updateMasterRate(Long id, float rate){
-        LOGGER.info("Updating master" + id +" rate" + rate);
+        LOGGER.info("Updating master id = {}, rate = {}", id, rate);
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(updateRate)){
             statement.setFloat(1, rate);
             statement.setLong(2, id);
 
             int res = statement.executeUpdate();
-
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -202,7 +201,7 @@ public class MasterDAO implements IMasterDAO {
     }
 
     public Master findMasterByUserId(Long id){
-        LOGGER.info("Getting master by user id " + id);
+        LOGGER.info("Getting master by user id = {}", id);
         Master master = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByUserIdQuery)){
@@ -223,7 +222,7 @@ public class MasterDAO implements IMasterDAO {
 
 
     public Master findMasterById(Long id){
-        LOGGER.info("Getting master by id " + id);
+        LOGGER.info("Getting master by id = {}", id);
         Master master = null;
         try(Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(findByIdQuery)){

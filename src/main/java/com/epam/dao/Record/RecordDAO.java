@@ -90,27 +90,26 @@ public class RecordDAO implements IRecordDAO {
 
 
     public float getAvgRecords(List<Long> masterService) {
-        LOGGER.info("Getting records with limit");
+        LOGGER.info("Getting avg records");
 
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < masterService.size(); i++) {
-            sb.append(" OR master_has_service_id=").append(masterService.get(i));
+            sb.append(" OR master_has_service_id = ").append(masterService.get(i));
         }
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(getAvgMark + sb.toString())) {
-            statement.setLong(1, masterService.get(1));
+             PreparedStatement statement = connection.prepareStatement(getAvgMark + sb)) {
+            statement.setLong(1, masterService.get(0));
+
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                return result.getInt("avg");
+                return result.getFloat("avg");
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
             return 0;
         }
         return 0;
-
-
     }
 
     public int getCountRecords() {
@@ -258,14 +257,13 @@ public class RecordDAO implements IRecordDAO {
 
 
     public Boolean updateMark(Long id, int mark, String feedback) {
-        LOGGER.info("Update mark {} to {}", id, mark);
+        LOGGER.info("Update record id = {} with mark = {}", id, mark);
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateMark)) {
             statement.setInt(1, mark);
             statement.setString(2, feedback);
             statement.setLong(3, id);
             statement.executeUpdate();
-
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
             return false;

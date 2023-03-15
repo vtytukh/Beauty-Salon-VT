@@ -63,13 +63,21 @@ public class CommentCommand implements ServletCommand {
         if (record.updateMark(id, mark, feedback)) {
             LOGGER.info("Added feedback successfully");
 
+            LOGGER.info("Update status to {}", Status.FEEDBACKED);
+            if (record.updateStatus(id, Status.FEEDBACKED)) {
+                LOGGER.info("Updating record status successful");
+            } else {
+                LOGGER.info("Updating record status unsuccessful");
+            }
+
             List<ServiceMaster> list = serviceMaster.findServiceMasterByMasterId(master_id);
             List<Long> sm = new ArrayList<>();
             for (ServiceMaster s : list) {
                 sm.add(s.getId());
             }
 
-            float avgMark = record.getAvgRecords(sm);
+            float avgMark = (float) (Math.round(record.getAvgRecords(sm) * 10.0) / 10.0);
+
             LOGGER.info("Avg mark = {}", avgMark);
             if (master.updateMasterRate(master_id, avgMark)) {
                 LOGGER.info("Updating master rate successful");
@@ -77,20 +85,11 @@ public class CommentCommand implements ServletCommand {
                 LOGGER.info("Updating master rate unsuccessful");
             }
 
-            LOGGER.info("Update status = {}", Status.FEEDBACKED);
-            if (record.updateStatus(id, Status.FEEDBACKED)) {
-                LOGGER.info("Updating record status successful");
-            } else {
-                LOGGER.info("Updating record status unsuccessful");
-            }
-
             response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=feedback_success");
-            page = null;
         } else {
             LOGGER.info("Added feedback unsuccessfully");
             response.sendRedirect(request.getContextPath()+"/myOrders?valid_message=feedback_unsuccessful");
-            page = null;
         }
-        return page;
+        return null;
     }
 }
