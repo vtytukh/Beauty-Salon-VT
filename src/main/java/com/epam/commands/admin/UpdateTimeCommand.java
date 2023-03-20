@@ -38,8 +38,8 @@ public class UpdateTimeCommand implements ServletCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        LOGGER.info("Executing UpdateTimeCommand");
 
+        LOGGER.info("Executing UpdateTimeCommand");
 
         if (request.getParameter("id") != null && request.getParameter("time") != null) {
             long record_id = Integer.parseInt(request.getParameter("id"));
@@ -47,8 +47,12 @@ public class UpdateTimeCommand implements ServletCommand {
             LOGGER.info("Hour {}", hour);
 
             String time;
-            if (hour.length() == 1) time = "0" + hour + ":00";
-            else time = hour + ":00";
+            if (hour.length() == 1) {
+                time = "0" + hour + ":00";
+            }
+            else {
+                time = hour + ":00";
+            }
             LOGGER.info("Time {}", time);
             Record rec = record.findRecord(record_id);
 
@@ -57,10 +61,13 @@ public class UpdateTimeCommand implements ServletCommand {
 
             if (record.updateTime(record_id, date)) {
                 LOGGER.info("Update time was successfully");
-            } else LOGGER.info("Update time was unsuccessfully");
+                response.sendRedirect(request.getContextPath()+"/admin/records?valid_message=time_updated_success");
+            } else {
+                LOGGER.info("Update time was unsuccessfully");
+                response.sendRedirect(request.getContextPath()+"/admin/records?valid_message=time_updated_unsuccessful");
+            }
+            page = null;
         }
-
-
         return page;
     }
 }
