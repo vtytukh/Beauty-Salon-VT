@@ -31,7 +31,6 @@ public class SetMasterRoleCommand implements ServletCommand {
     private static String page;
     private static String pageRe;
 
-
     public SetMasterRoleCommand() {
         LOGGER.info("Initializing SetMasterRoleCommand");
 
@@ -46,18 +45,22 @@ public class SetMasterRoleCommand implements ServletCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        LOGGER.info("Executing command");
+        LOGGER.info("Executing SetMasterRoleCommand");
 
         if (request.getParameter("id") != null) {
-            LOGGER.info("Parameter user_id => " + request.getParameter("id"));
             long user_id = Long.parseLong(request.getParameter("id"));
 
             if (user.updateRole(user_id, Role.MASTER)) {
-                if (master.addMaster(user_id))
-                    LOGGER.info("Master added successfully");
+                if (master.addMaster(user_id)) {
+                    LOGGER.info("Master role was added successfully");
+                    response.sendRedirect(request.getContextPath()+"/admin/users?valid_message=master_added_success");
+                } else {
+                    LOGGER.info("Adding master role was unsuccessfully");
+                    response.sendRedirect(request.getContextPath()+"/admin/users?valid_message=master_added_unsuccessful");
+                }
             }
+            page = null;
         } else return pageRe;
-
 
         return page;
     }

@@ -31,6 +31,24 @@
                 </div>
             </c:if>
 
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'master_added_success'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="masterAddedSuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
+            <c:if test="${pageContext.request.getParameter('valid_message') eq 'master_added_unsuccessful'}">
+                <div class="row justify-content-center">
+                    <div class="w-75 alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        <fmt:message key="masterAddedUnsuccessfully" bundle="${bundle}"/>
+                    </div>
+                </div>
+            </c:if>
+
             <h2 class="text-center">
                 <fmt:message key="allUsers" bundle="${bundle}"/> <i class="bi bi-people-fill"></i>
             </h2>
