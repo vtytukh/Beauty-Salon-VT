@@ -89,7 +89,6 @@
                                 <form action="${pageContext.request.contextPath}/admin/records/cancel?id=${record.id}"
                                     method="post">
                                     <input class="btn btn-outline-danger form-control" type="submit"
-                                        onclick="alert('Do yo want to cancel a record?')"
                                         value="<fmt:message key="cancelRecord" bundle="${bundle}"/>">
                                 </form>
                             </div>

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Class that set status to cancel of record
@@ -35,19 +36,22 @@ public class CancelStatusCommand implements ServletCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing CancelStatusCommand");
 
         String resultPage = recordsPage;
-        LOGGER.info("Id parameter " + request.getParameter("id"));
+
         if (request.getParameter("id") != null) {
             long id = Integer.parseInt(request.getParameter("id"));
             if (record.updateStatus(id, Status.CANCELED)) {
                 LOGGER.info("Set status to canceled successful");
-                return resultPage;
+                response.sendRedirect(request.getContextPath()+"/admin/records?valid_message=canceled_success");
+            } else {
+                LOGGER.info("Set status to canceled unsuccessful");
+                response.sendRedirect(request.getContextPath()+"/admin/records?valid_message=canceled_unsuccessful");
             }
+            resultPage = null;
         }
-        LOGGER.info("Set status to canceled unsuccessful");
-        return recordsPage;
+        return resultPage;
     }
 }
