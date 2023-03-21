@@ -5,6 +5,7 @@ import com.epam.dao.Master.MasterDAO;
 import com.epam.dao.ServiceMaster.ServiceMasterDAO;
 import com.epam.model.Master;
 import com.epam.model.ServiceMaster;
+import com.epam.service.FieldValidationService;
 import com.epam.service.MasterService;
 import com.epam.service.ServiceMasterService;
 import com.epam.utility.ParsePathProperties;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Class that add new service to master
@@ -49,28 +51,34 @@ public class UsersCommand implements ServletCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing UsersCommand");
 
-        if (request.getParameter("id") == null || request.getParameter("price") == null
-                || request.getParameter("service-id") == null) {
+        String idString = request.getParameter("id");
+        String priceString = request.getParameter("price");
+        String serviceIdString = request.getParameter("service-id");
+
+        if (idString != null && serviceIdString != null && FieldValidationService.isMoneyValid(priceString)) {
+            long id = Integer.parseInt(idString);
+            BigDecimal price = new BigDecimal(priceString).setScale(2, RoundingMode.HALF_UP);
+            long serviceId = Integer.parseInt(serviceIdString);
+            LOGGER.info("user id = {}", id);
+            Master mas = master.findMasterByUserId(id);
+            LOGGER.info("master id = {}", mas.getId());
+            LOGGER.info("service id = {}", serviceId);
+            ServiceMaster sm = new ServiceMaster();
+            sm.setMaster_id(mas.getId());
+            sm.setService_id(serviceId);
+            sm.setPrice(price);
+
+            if (serviceMaster.addServiceMaster(sm)) {
+                LOGGER.info("Added service to master successfully");
+                response.sendRedirect(request.getContextPath()+"/admin/users?valid_message=service_added_success");
+            } else {
+                LOGGER.info("Added service to master unsuccessfully");
+                response.sendRedirect(request.getContextPath()+"/admin/users?valid_message=service_added_unsuccessful");
+            }
+            return null;
+        } else  {
             LOGGER.info("Parameters are null");
             return pageRe;
         }
-        long id = Integer.parseInt(request.getParameter("id"));
-        int price = Integer.parseInt(request.getParameter("price"));
-        long service_id = Integer.parseInt(request.getParameter("service-id"));
-
-        LOGGER.info("user id = {}", id);
-        Master mas = master.findMasterByUserId(id);
-        LOGGER.info("master id = {}", mas.getId());
-        LOGGER.info("service id = {}", service_id);
-        ServiceMaster sm = new ServiceMaster();
-        sm.setMaster_id(mas.getId());
-        sm.setService_id(service_id);
-        sm.setPrice(BigDecimal.valueOf(price));
-
-        if (serviceMaster.addServiceMaster(sm)) {
-            LOGGER.info("Added service to master successfully");
-        }
-
-        return page;
     }
 }
