@@ -87,10 +87,9 @@ public class CommandManager {
 //        errorPage = properties.getProperty("errorPage");
     }
 
-
     public ServletCommand getGetCommand(HttpServletRequest request) {
         String command = getMapping(request);
-        LOGGER.info("Getting command " + command);
+        LOGGER.info("Getting command {}", command);
 
         if (getCommands.get(command) == null) {
             return getCommands.get("/");
@@ -102,7 +101,7 @@ public class CommandManager {
 
     public ServletCommand getPostCommand(HttpServletRequest request) {
         String command = getMapping(request);
-        LOGGER.info("Getting command " + command);
+        LOGGER.info("Getting command {}", command);
 
         if (postCommands.get(command) == null) {
             return getCommands.get("/");

@@ -65,7 +65,7 @@
 
             <div class="row">
                 <div class="col-3">
-                    <select class="form-select" onchange="filterMasterByService(this);">
+                    <select class="form-select" onchange="orderBy();" id="service-id">
                         <option selected value="0"><fmt:message key="allMasters" bundle="${bundle}"/></option>
                         <c:forEach items="${services}" var="service">
                             <option value="<c:out value="${service.id}" />"><c:out value="${service.name}" /></option>
@@ -134,20 +134,11 @@
             xhttp.open("GET", "${pageContext.request.contextPath}/filterServices?id="+master.value , true);
             xhttp.send();
         }
-        function filterMasterByService(service) {
-            console.log(service);
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("masters").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "${pageContext.request.contextPath}/filterMasters?id="+service.value , true);
-            xhttp.send();
-        }
         function orderBy() {
             var column = document.getElementById("order-column").value;
             var way = document.getElementById("order-way").value;
+            var service = document.getElementById("service-id").value;
+            console.log(service);
             console.log(column);
             console.log(way);
             var xhttp = new XMLHttpRequest();
@@ -156,7 +147,7 @@
                     document.getElementById("masters").innerHTML = this.responseText;
                 }
             };
-            xhttp.open("GET", "${pageContext.request.contextPath}/orderBy?id="+column+"&way="+way , true);
+            xhttp.open("GET", "${pageContext.request.contextPath}/orderBy?column="+column+"&way="+way+"&service="+service, true);
             xhttp.send();
         }
     </script>

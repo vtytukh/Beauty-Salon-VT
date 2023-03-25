@@ -42,21 +42,23 @@ public class OrderByNameCommand implements ServletCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOGGER.info("Executing command");
 
-        String s1 = request.getParameter("id");
-        String s2 = request.getParameter("way");
+        String columnStr = request.getParameter("column");
+        String wayStr = request.getParameter("way");
+        String serviceStr = request.getParameter("service");
         List<Master> masterList;
 
-        if (s1 != null && s2 != null) {
-            int resultColumn = Integer.parseInt(s1);
-            int resultWay = Integer.parseInt(s2);
-            boolean isRate = false;
-            boolean isDescending = false;
-            if (resultWay == 1) isDescending = true;
-            if (resultColumn != 0) {
-                if (resultColumn == 2) isRate = true;
-                masterList = master.findAllWithNameOrderBy(isRate, isDescending);
+        if (columnStr != null && wayStr != null && serviceStr != null) {
+            int resultColumn = Integer.parseInt(columnStr);
+            int resultWay = Integer.parseInt(wayStr);
+            Long serviceId = Long.parseLong(serviceStr);
+
+            boolean isRate = resultColumn == 2;
+            boolean isDescending = resultWay == 1;
+
+            if (serviceId != 0) {
+                masterList = master.findMastersWithNameByServiceId(isRate, isDescending, serviceId);
             } else {
-                masterList = master.findAllWithName();
+                masterList = master.findMastersWithNameOrderBy(isRate, isDescending);
             }
         } else {
             masterList = master.findAllWithName();
@@ -91,11 +93,9 @@ public class OrderByNameCommand implements ServletCommand {
             sb.append("</div>");
             sb.append("</div>");
         }
-
         sb.append("</div>");
 
-
-        out.print(sb.toString());
+        out.print(sb);
 
         return null;
 

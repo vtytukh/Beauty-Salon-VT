@@ -20,6 +20,7 @@ public class MasterDAO implements IMasterDAO {
     private static String updateQuery;
     private static String findByIdQuery;
     private static String findAllQuery;
+    private static String findMastersByServiceId;
     private static String findMasterByName;
     private static String findByUserIdQuery;
     private static String updateRate;
@@ -31,6 +32,7 @@ public class MasterDAO implements IMasterDAO {
         updateQuery = properties.getProperty("createMaster");
         findByIdQuery = properties.getProperty("findMasterById");
         findAllQuery = properties.getProperty("findAllMastersWithName");
+        findMastersByServiceId = properties.getProperty("findMastersWithNameByServiceId");
         findMasterByName = properties.getProperty("findMasterByName");
         findByUserIdQuery = properties.getProperty("findMasterByUserId");
         updateRate = properties.getProperty("updateRate");
@@ -100,25 +102,20 @@ public class MasterDAO implements IMasterDAO {
     }
 
 
-    public List<Master> findAllWithNameOrder(boolean isByRate, boolean isDescending) {
+    public List<Master> findMastersWithNameByServiceId(boolean isByRate, boolean isDescending, Long serviceId) {
         LOGGER.info("Getting all masters with name");
         List<Master> listMasters = new ArrayList<>();
-        String sql = findAllQuery;
-        String order = " ORDER BY ";
-        if(isByRate) order += "master.rate";
-        else order += "user.first_name"; //, user.last_name";
+        String sql = findMastersByServiceId;
+        sql += getOrderBySQL(isByRate, isDescending);
 
-        sql += order;
-        if(isDescending) sql += " DESC";
-
-        try(Connection connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)){
+        try (Connection connection = connectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, serviceId);
             ResultSet result = statement.executeQuery();
 
-            while(result.next()) {
+            while (result.next()) {
                 Master master = new Master();
                 master.setId(result.getLong("id"));
-                //master.setUser_id(result.getLong("user_id"));
                 master.setMark(result.getFloat("rate"));
                 master.setUser(
                         new User(
@@ -132,6 +129,44 @@ public class MasterDAO implements IMasterDAO {
         }
 
         return listMasters;
+    }
+
+    public List<Master> findMastersWithNameOrderBy(boolean isByRate, boolean isDescending) {
+        LOGGER.info("Getting all masters with name");
+        List<Master> listMasters = new ArrayList<>();
+        String sql = findAllQuery;
+        sql += getOrderBySQL(isByRate, isDescending);
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                Master master = new Master();
+                master.setId(result.getLong("id"));
+                master.setMark(result.getFloat("rate"));
+                master.setUser(
+                        new User(
+                                result.getString("first_name"),
+                                result.getString("last_name")));
+
+                listMasters.add(master);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+        return listMasters;
+    }
+
+    private String getOrderBySQL(boolean isByRate, boolean isDescending) {
+        StringBuilder orderBy = new StringBuilder(" ORDER BY ");
+        if (isByRate) orderBy.append("master.rate");
+        else orderBy.append("user.first_name");
+
+        if (isDescending) orderBy.append(" DESC");
+
+        return orderBy.toString();
     }
 
     public Master findMasterWithNameById(Long id) {

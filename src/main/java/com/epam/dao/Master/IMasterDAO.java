@@ -10,7 +10,7 @@ public interface IMasterDAO {
 
     List<Master> findAllWithName();
 
-    List<Master> findAllWithNameOrder(boolean isByRate, boolean isDescending);
+    List<Master> findMastersWithNameByServiceId(boolean isByRate, boolean isDescending, Long serviceId);
 
     Master findMasterWithNameById(Long id);
 

@@ -99,7 +99,7 @@ public class FilterMasterByServiceCommand implements ServletCommand {
 
         sb.append("</div>");
 
-        out.print(sb.toString());
+        out.print(sb);
 
         return null;
 
