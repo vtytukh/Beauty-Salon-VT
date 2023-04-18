@@ -33,7 +33,7 @@ class FieldValidationServiceTest {
         assertFalse(FieldValidationService.isMailValid("test.mail@mail"),
                 "Email is incorrect – missing subdomain");
     }
-//You can use latin symbols, figures, and -_ . Length must be from 6 to 20 symbols
+
     @Test
     @DisplayName("isPasswordValid(): correct password inputs")
     void testIsPasswordValidCorrectPasswordTesting() {
@@ -68,10 +68,35 @@ class FieldValidationServiceTest {
     }
 
     @Test
-    void isNameValid() {
+    @DisplayName("isNameValid(): name length testing")
+    void testIsNameValidLengthTesting() {
+        assertFalse(FieldValidationService.isNameValid(""),
+                "Name is too short – length must be from 2 to 45 symbols");
+        assertTrue(FieldValidationService.isPasswordValid("Volodymyr"),
+                "Length must be from 2 to 45 symbols");
+        assertFalse(FieldValidationService.isNameValid("MyNameIsTooLooooooooooooooooooooooooooooooooong"),
+                "Name is too long – length must be from 2 to 45 symbols");
     }
 
     @Test
+    @DisplayName("isMoneyValid(): money values testing")
     void isMoneyValid() {
+        assertTrue(FieldValidationService.isMoneyValid("120"));
+        assertTrue(FieldValidationService.isMoneyValid("120.00"));
+        assertTrue(FieldValidationService.isMoneyValid("120,25"));
+        assertFalse(FieldValidationService.isMoneyValid(""),
+                "Money should have a whole part");
+        assertFalse(FieldValidationService.isMoneyValid(".12"),
+                "Money should have a whole part");
+        assertFalse(FieldValidationService.isMoneyValid(",12"),
+                "Money should have a whole part");
+        assertFalse(FieldValidationService.isMoneyValid("-120,12"),
+                "Money cannot have a negative value");
+        assertFalse(FieldValidationService.isMoneyValid("ьщтун"),
+                "You cannot use the Cyrillic alphabet");
+        assertFalse(FieldValidationService.isMoneyValid("money"),
+                "You cannot use the Latin alphabet");
+        assertFalse(FieldValidationService.isMoneyValid("12*0 ?%"),
+                "You cannot use special characters");
     }
 }
