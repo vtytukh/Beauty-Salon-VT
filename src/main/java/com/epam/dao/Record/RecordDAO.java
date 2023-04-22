@@ -16,7 +16,6 @@ public class RecordDAO implements IRecordDAO {
     private static final Logger LOGGER = LogManager.getLogger(RecordDAO.class);
     private static RecordDAO INSTANCE;
     private static ConnectionPool connectionPool;
-
     private static String createQuery;
     private static String findByIdQuery;
     private static String findAllQuery;
@@ -375,7 +374,6 @@ public class RecordDAO implements IRecordDAO {
 
         return record;
     }
-
 
     private Record getRecord(ResultSet resultSet) {
         Record record = null;

@@ -15,8 +15,6 @@ public class ServiceMasterDAO implements IServiceMasterDAO {
     private static final Logger LOGGER = LogManager.getLogger(ServiceMasterDAO.class);
     private static ServiceMasterDAO INSTANCE;
     private static ConnectionPool connectionPool;
-
-
     private static String createQuery;
     private static String findByIdQuery;
     private static String findByService;
@@ -67,24 +65,6 @@ public class ServiceMasterDAO implements IServiceMasterDAO {
         }
         return masterService;
     }
-
-//    public ServiceMaster findServiceMasterBy(Long id) {
-//        LOGGER.info("Getting service-master by id " + id);
-//        ServiceMaster serviceMaster = null;
-//        //try(Connection connection = connectionPool.getConnection()) {
-//        try(PreparedStatement statement = connection.prepareStatement(findByIdQuery)){
-//            statement.setLong(1, id);
-//
-//            ResultSet result = statement.executeQuery();
-//
-//            serviceMaster = getService(result);
-//        } catch (SQLException e) {
-//            LOGGER.error(e.getMessage());
-//        }
-//
-//        return serviceMaster;
-//    }
-
 
     public List<ServiceMaster> findMasterByService(Long id) {
         LOGGER.info("Getting masters by service id = {}", id);

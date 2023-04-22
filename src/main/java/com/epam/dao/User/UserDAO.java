@@ -19,7 +19,6 @@ public class UserDAO implements IUserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
     private static UserDAO INSTANCE;
     private static ConnectionPool connectionPool;
-
     private static String createQuery;
     private static String updateQuery;
     private static String deleteQuery;
@@ -30,7 +29,7 @@ public class UserDAO implements IUserDAO {
     private static String updateUserToMaster;
     private static String getCountUsers;
 
-    private  UserDAO(){
+    private UserDAO(){
         connectionPool = ConnectionPool.getInstance();
 
         ParseSqlProperties properties = ParseSqlProperties.getInstance();

@@ -16,7 +16,6 @@ public class MasterDAO implements IMasterDAO {
     private static final Logger LOGGER = LogManager.getLogger(MasterDAO.class);
     private static MasterDAO INSTANCE;
     private static ConnectionPool connectionPool;
-
     private static String updateQuery;
     private static String findByIdQuery;
     private static String findAllQuery;
@@ -25,7 +24,7 @@ public class MasterDAO implements IMasterDAO {
     private static String findByUserIdQuery;
     private static String updateRate;
 
-    private  MasterDAO() {
+    private MasterDAO() {
         connectionPool = ConnectionPool.getInstance();
 
         ParseSqlProperties properties = ParseSqlProperties.getInstance();
@@ -254,7 +253,6 @@ public class MasterDAO implements IMasterDAO {
 
         return master;
     }
-
 
     public Master findMasterById(Long id){
         LOGGER.info("Getting master by id = {}", id);

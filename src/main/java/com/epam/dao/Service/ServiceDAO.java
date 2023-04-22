@@ -15,8 +15,6 @@ public class ServiceDAO implements IServiceDAO {
     private static final Logger LOGGER = LogManager.getLogger(ServiceDAO.class);
     private static ServiceDAO INSTANCE;
     private static ConnectionPool connectionPool;
-
-
     private static String createQuery;
     private static String findByIdQuery;
     private static String findAllQuery;
@@ -121,6 +119,5 @@ public class ServiceDAO implements IServiceDAO {
 
         return service;
     }
-
 
 }
