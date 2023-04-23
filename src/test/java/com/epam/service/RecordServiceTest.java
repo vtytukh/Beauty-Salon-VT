@@ -25,7 +25,7 @@ class RecordServiceTest {
     private RecordService recordService;
     private Record testRecord;
     private List<Record> testRecordsList;
-    private Long testId = 1L;
+    private final Long testId = 1L;
 
     @BeforeEach
     void setUp() {
