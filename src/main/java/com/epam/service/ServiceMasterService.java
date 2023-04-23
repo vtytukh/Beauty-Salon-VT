@@ -21,9 +21,8 @@ public class ServiceMasterService {
 
     public boolean addServiceMaster(ServiceMaster serviceMaster) {
         LOGGER.info("Add new service-master");
-        serviceMasterDAO.createServiceMaster(serviceMaster);
-        //return serviceMaster != null && serviceMasterDAO.createServiceMaster(serviceMaster).getId() != null;
-        return true;
+
+        return serviceMaster != null && serviceMasterDAO.createServiceMaster(serviceMaster).getId() != null;
     }
 
     public ServiceMaster findServiceMasterById(Long id) {
