@@ -204,7 +204,6 @@ public class UserDAO implements IUserDAO {
                         .setFirstName(resultSet.getString("first_name"))
                         .setLastName(resultSet.getString("last_name"))
                         .setEmail(resultSet.getString("email"))
-                        //.setPassword(resultSet.getString("password"))
                         .setPassword(Encrypt.encrypt(resultSet.getString("password")))
                         .setUserType(Role.values()[resultSet.getInt("role_id") - 1])
                         .build();
