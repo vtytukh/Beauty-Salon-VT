@@ -19,7 +19,7 @@ public class ServiceDAO implements IServiceDAO {
     private static String findByIdQuery;
     private static String findAllQuery;
 
-    private  ServiceDAO() {
+    private ServiceDAO() {
         connectionPool = ConnectionPool.getInstance();
 
         ParseSqlProperties properties = ParseSqlProperties.getInstance();
@@ -34,7 +34,6 @@ public class ServiceDAO implements IServiceDAO {
         }
         return INSTANCE;
     }
-
 
     public Service createService(Service service){
         LOGGER.info("Creating service");
@@ -101,7 +100,6 @@ public class ServiceDAO implements IServiceDAO {
 
         return service;
     }
-
 
     private Service getService(ResultSet resultSet) {
         Service service = null;
