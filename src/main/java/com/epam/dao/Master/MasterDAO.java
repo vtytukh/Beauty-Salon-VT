@@ -58,7 +58,6 @@ public class MasterDAO implements IMasterDAO {
                 try(ResultSet resultSet = statement.getGeneratedKeys()){
                     if(resultSet.next()) {
                         master.setId(resultSet.getLong(1));
-                        //master.setUser(user);
                         master.setUser_id(id);
                         master.setMark(0);
                     } else {
@@ -84,7 +83,6 @@ public class MasterDAO implements IMasterDAO {
             while(result.next()) {
                 Master master = new Master();
                 master.setId(result.getLong("id"));
-                //master.setUser_id(result.getLong("user_id"));
                 master.setMark(result.getFloat("rate"));
                 master.setUser(
                         new User(
