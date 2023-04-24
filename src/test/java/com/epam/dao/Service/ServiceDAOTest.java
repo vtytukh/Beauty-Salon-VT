@@ -39,8 +39,8 @@ class ServiceDAOTest {
 
     @BeforeEach
     void setUp() {
-        try (MockedStatic<ConnectionPool> connectionPoolMock = mockStatic(ConnectionPool.class)) {
-            connectionPoolMock.when(ConnectionPool::getInstance).thenReturn(this.connectionPoolMock);
+        try (MockedStatic<ConnectionPool> connectionPoolMockedStatic = mockStatic(ConnectionPool.class)) {
+            connectionPoolMockedStatic.when(ConnectionPool::getInstance).thenReturn(connectionPoolMock);
             serviceDAO = ServiceDAO.getInstance();
         }
 
