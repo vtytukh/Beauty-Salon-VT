@@ -87,7 +87,6 @@ public class RecordDAO implements IRecordDAO {
         return record;
     }
 
-
     public float getAvgRecords(List<Long> masterService) {
         LOGGER.info("Getting avg records");
 
@@ -254,7 +253,6 @@ public class RecordDAO implements IRecordDAO {
         return listRecords;
     }
 
-
     public Boolean updateMark(Long id, int mark, String feedback) {
         LOGGER.info("Update record id = {} with mark = {}", id, mark);
         try (Connection connection = connectionPool.getConnection();
@@ -270,7 +268,6 @@ public class RecordDAO implements IRecordDAO {
 
         return true;
     }
-
 
     public Boolean updateStatus(Long id, Status status) {
         LOGGER.info("Update status id = " + id + " to " + status.value());
