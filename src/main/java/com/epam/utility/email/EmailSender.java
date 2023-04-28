@@ -24,12 +24,6 @@ import java.util.Properties;
 public class EmailSender {
 
     private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
-
-    /*private static final String EMAIL_SUBJECT = "Leave Feedback";
-    private static final String EMAIL_CONTENT = "<h3>Dear, %s!</h3>" +
-            "<p>Please leave your feedback about our service.</p>" +
-            "<p>It helps us become better.</p>";*/
-
     private static final String EMAIL_SUBJECT = "Залиште відгук про BeautySalon VT";
     private static final String EMAIL_CONTENT = "<h3>Шановна(ий), %s!</h3>" +
             "<p>Будь ласка, залиште відгук для <strong>%s</strong> за надану послугу <em>%s</em>.</p>" +
@@ -40,7 +34,7 @@ public class EmailSender {
     public static boolean sendEmail(String emailTo, String clientName,
                                     String masterName, String serviceName, String recordId)
     {
-        LOGGER.info("Sending email to " + emailTo);
+        LOGGER.info("Sending email to {}", emailTo);
         String status = null;
 
         Properties properties = new Properties();
@@ -99,7 +93,6 @@ public class EmailSender {
         RecordDAO recordDAO = RecordDAO.getInstance();
         RecordService record = new RecordService(recordDAO);
 
-
         List<Record> records = record.findPreviousDayRecordsWithoutFeedback();
 
         List<User> users = new ArrayList<>();
@@ -115,7 +108,6 @@ public class EmailSender {
             long id = records.get(i).getStatus_id() - 1;
             statuses.add(Status.values()[(int) id]);
         }
-
 
         List<Master> masters = new ArrayList<>();
         for (int i = 0; i < mastersService.size(); i++) {
@@ -162,7 +154,4 @@ public class EmailSender {
         }
     }
 
-    static void emailProcessTest(){
-        LOGGER.info("emailProcessTest: {}", LocalDateTime.now());
-    }
 }

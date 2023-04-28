@@ -76,7 +76,6 @@ public class RegisterCommand implements ServletCommand {
                         .setUserType(Role.CLIENT)
                         .build();
 
-                //dao.createUser(user);
                 if (userService.registerUser(user)) {
                     request.setAttribute("services", service.findAll());
                     request.setAttribute("masters", master.findAllWithName());

@@ -21,7 +21,6 @@ public class EmailController {
     public void startScheduler() {
         LOGGER.info("Start EmailScheduler");
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        //scheduledExecutorService.scheduleAtFixedRate(EmailSender::emailProcessTest, 10, 10, TimeUnit.SECONDS);
         scheduledExecutorService.scheduleAtFixedRate(EmailSender::emailProcess,
                 10, PERIOD, TimeUnit.SECONDS);
         /*scheduledExecutorService.scheduleAtFixedRate(EmailSender::emailProcess,

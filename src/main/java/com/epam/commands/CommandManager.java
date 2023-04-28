@@ -83,8 +83,8 @@ public class CommandManager {
         postCommands.put("/language", new ChangeLanguageCommand());
 
 
-//        ParseProperties properties = ParseProperties.getInstance();
-//        errorPage = properties.getProperty("errorPage");
+        //ParseProperties properties = ParseProperties.getInstance();
+        //errorPage = properties.getProperty("errorPage");
     }
 
     public ServletCommand getGetCommand(HttpServletRequest request) {
@@ -97,7 +97,6 @@ public class CommandManager {
 
         return getCommands.get(command);
     }
-
 
     public ServletCommand getPostCommand(HttpServletRequest request) {
         String command = getMapping(request);

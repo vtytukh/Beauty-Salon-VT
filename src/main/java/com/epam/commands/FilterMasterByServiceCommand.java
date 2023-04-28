@@ -67,7 +67,6 @@ public class FilterMasterByServiceCommand implements ServletCommand {
         }
         request.setAttribute("masters", masterList);
 
-
         PrintWriter out = response.getWriter();
 
         StringBuilder sb = new StringBuilder();

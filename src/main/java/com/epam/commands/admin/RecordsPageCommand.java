@@ -117,50 +117,6 @@ public class RecordsPageCommand implements ServletCommand {
         request.setAttribute("currentPage", pageNumb);
         //----------------
 
-        /*StringBuilder sb = new StringBuilder();
-
-        sb.append("<ul class=\"pagination justify-content-center\">\n");
-        for (int i = 0; i < numberPages; i++) {
-
-            sb.append("<li class=\"page-item");
-            if (i + 1 == pageNumb) {
-                sb.append(" active\">");
-            } else {
-                sb.append("\">");
-            }
-            sb.append("<a class=\"page-link\" href=\"")
-                    .append(request.getContextPath())
-                    .append("/admin/records?page=")
-                    .append(i + 1).append("\">")
-                    .append(i + 1).append("</a></li>\n");
-        }
-        sb.append("</ul>");
-
-        request.setAttribute("pages", sb.toString());*/
-
-//        List<Record> records = record.findAllRecord();
-//        List<User> users = new ArrayList<>();
-//        List<ServiceMaster> mastersService = new ArrayList<>();
-//        List<Status> statuses = new ArrayList<>();
-//        List<Master> masters = new ArrayList<>();
-//        List<Service> services = new ArrayList<>();
-//        List<User> mastersUser = new ArrayList<>();
-//
-//        for(int i = 0; i < records.size(); i++){
-//            users.add(user.findUserById(records.get(i).getUser_id()));
-//            mastersService.add(serviceMaster.findServiceMasterById(records.get(i).getMaster_has_service_id()));
-//            long id = records.get(i).getStatus_id() - 1;
-//            statuses.add(Status.values()[(int)id]);
-//            masters.add(master.findMasterById(mastersService.get(i).getMaster_id()));
-//            services.add(service.findServiceById(mastersService.get(i).getService_id()));
-//            mastersUser.add(user.findUserById(masters.get(i).getUser_id()));
-//            records.get(i).setUser(users.get(i));
-//            records.get(i).setUserMaster(mastersUser.get(i));
-//            records.get(i).setService(services.get(i));
-//            records.get(i).setServiceMaster(mastersService.get(i));
-//            records.get(i).setStatus(statuses.get(i));
-//        }
-
         return page;
     }
 }

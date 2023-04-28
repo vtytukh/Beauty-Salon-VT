@@ -183,7 +183,6 @@ public class MasterDAO implements IMasterDAO {
                 master.setMark(result.getFloat("rate"));
             }
 
-
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

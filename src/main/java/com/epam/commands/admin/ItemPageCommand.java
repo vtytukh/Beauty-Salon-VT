@@ -119,7 +119,6 @@ public class ItemPageCommand implements ServletCommand {
         request.setAttribute("record", rec);
         request.setAttribute("recTime", freeHours);
 
-
         return page;
     }
 }
